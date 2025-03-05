@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gestión de Usuarios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #004281; /* Azul IPN */
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            color: #004281;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #004281; /* Azul IPN */
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .actions a {
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #004281; /* Azul IPN */
+            color: #fff;
+            border-radius: 3px;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .actions a:hover {
+            background-color: #00355b; /* Azul IPN oscuro */
+        }
+
+        .create-user {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #004281; /* Azul IPN */
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .create-user:hover {
+            background-color: #00355b; /* Azul IPN oscuro */
+        }
+
+        .back-link {
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Usuarios</h1>
+        <a href="/admin" class="back-link">Regresar</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iteración para mostrar usuarios -->
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">ID</td>
+                    <td th:text="${usuario.nombre}">Nombre</td>
+                    <td th:text="${usuario.email}">Email</td>
+                    <td class="actions">
+                        <a th:href="@{'/admin/users/edit/' + ${usuario.id}}">Editar</a>
+                        <a th:href="@{'/admin/users/delete/' + ${usuario.id}}" style="background-color: red;">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/admin/users/edit/0" class="create-user">Crear Nuevo Usuario</a>
+    </div>
+</body>
+</html>

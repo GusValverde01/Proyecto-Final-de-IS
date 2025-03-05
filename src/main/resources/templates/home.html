@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #004281; /* Azul IPN */
+            text-align: center;
+        }
+
+        .message {
+            font-size: 1.2em;
+            color: #666;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .profile-section {
+            margin-top: 20px;
+        }
+
+        .profile-section h2 {
+            color: #004281; /* Azul IPN */
+            margin-top: 0;
+        }
+
+        .profile-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .profile-section li {
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #333;
+        }
+
+        .logout-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #004281;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bienvenido, Usuario</h1>
+        <div class="message">
+            Esta es tu página principal. Aquí puedes consultar tu información personal.
+        </div>
+
+        <div class="profile-section">
+            <h2>Información del Perfil</h2>
+            <ul>
+                <li><strong>Nombre:</strong> <span th:text="${nombre}"></span></li>
+                <li><strong>Email:</strong> <span th:text="${email}"></span></li>
+                <li><strong>Rol:</strong> <span th:text="${rol}"></span></li>
+            </ul>
+        </div>
+
+        <a href="/logout" class="logout-link">Cerrar sesión</a>
+    </div>
+</body>
+</html>
