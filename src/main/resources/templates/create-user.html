@@ -3,37 +3,66 @@
 <head>
     <title>Crear Usuario</title>
     <style>
+        :root {
+            --primary-color: #004281; /* Azul IPN */
+            --primary-dark: #00335a;
+            --white: #ffffff;
+            --light-gray: #f2f2f2;
+            --text-dark: #333333;
+            --border-color: #dddddd;
+            --input-border: #cccccc;
+            --input-focus-shadow: rgba(0, 66, 129, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: var(--primary-color);
             margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            color: #004281; /* Azul IPN */
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        a {
-            text-decoration: none;
-            color: #004281;
-            font-size: 0.9em;
-        }
-
-        a:hover {
-            text-decoration: underline;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
+            width: 100%;
             max-width: 500px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 12px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding-left: 5px;
+        }
+
+        .back-link:hover {
+            transform: translateX(-3px);
+            color: var(--primary-dark);
         }
 
         form {
@@ -42,57 +71,86 @@
         }
 
         form div {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         label {
             font-size: 1em;
-            color: #333;
-            margin-bottom: 5px;
+            color: var(--text-dark);
+            margin-bottom: 8px;
             display: block;
+            font-weight: bold;
         }
 
         input[type="text"],
         input[type="email"],
         input[type="password"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border: 1px solid var(--input-border);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background-color: var(--light-gray);
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="password"]:focus {
-            border-color: #004281;
+            border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 0 3px var(--input-focus-shadow);
+            background-color: var(--white);
+        }
+
+        input::placeholder {
+            color: #999;
         }
 
         button {
-            background-color: #004281; /* Azul IPN */
-            color: white;
+            background-color: var(--primary-color);
+            color: var(--white);
             border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
+            padding: 12px 18px;
+            border-radius: 6px;
             font-size: 1em;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-right: 10px;
         }
 
         button:hover {
-            background-color: #00335a; /* Azul más oscuro */
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #004281;
+        button:active {
+            transform: translateY(0);
         }
 
-        .back-link:hover {
-            text-decoration: underline;
+        .action-buttons {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .cancel-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 10px 15px;
+            border: 1px solid var(--primary-color);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .cancel-link:hover {
+            background-color: var(--light-gray);
+            color: var(--primary-dark);
         }
     </style>
 </head>
@@ -121,9 +179,9 @@
             </div>
 
             <!-- Botones de acción -->
-            <div>
+            <div class="action-buttons">
                 <button type="submit">Guardar</button>
-                <a href="/admin/users" class="back-link">Cancelar</a>
+                <a href="/admin/users" class="cancel-link">Cancelar</a>
             </div>
         </form>
     </div>

@@ -6,17 +6,26 @@
     <title>Registro de Usuario</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #004281 0%, #002d59 100%);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
-            width: 300px;
-            margin: 50px auto;
-            padding: 30px;
+            width: 350px;
+            padding: 40px;
             background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
         }
 
         .register-form {
@@ -24,58 +33,122 @@
         }
 
         .register-form h2 {
-            color: #004281; /* Azul IPN */
-            margin-bottom: 20px;
+            color: #004281;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .register-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: #004281;
+            border-radius: 2px;
         }
 
         .input-group {
-            margin-bottom: 15px;
-            text-align: left; /* Alineación de los campos */
+            margin-bottom: 22px;
+            text-align: left;
+            position: relative;
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 15px;
         }
 
         .input-group input {
             width: 100%;
-            height: 40px;
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        .btn-register {
-            background-color: #004281; /* Azul IPN */
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-            width: 100%;
-        }
-
-        .btn-register:hover {
-            background-color: #00355b; /* Azul IPN oscuro */
+            height: 45px;
+            padding: 10px 15px;
+            font-size: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
         }
 
         .input-group input:focus {
-            border: 1px solid #004281; /* Azul IPN */
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            border-color: #004281;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(0, 66, 129, 0.1);
+            outline: none;
+        }
+
+        .input-group input::placeholder {
+            color: #aaa;
+        }
+
+        .btn-register {
+            background-color: #004281;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-register:hover {
+            background-color: #00355b;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-register:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .back-to-login {
-            display: block;
-            margin-top: 20px;
+            display: inline-block;
+            margin-top: 25px;
             color: #004281;
             text-decoration: none;
-            font-size: 0.9em;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .back-to-login:hover {
-            text-decoration: underline;
+            color: #00355b;
+        }
+
+        .back-to-login::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #00355b;
+            transition: width 0.3s ease;
+        }
+
+        .back-to-login:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>

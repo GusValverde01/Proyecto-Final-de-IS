@@ -5,9 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Usuario</title>
     <style>
+        /* Variables de color */
+        :root {
+            --primary-color: #004281; /* Azul IPN */
+            --primary-dark: #00325e;
+            --secondary-color: #6c9c2f; /* Verde complementario */
+            --light-color: #f9f9f9;
+            --gray-light: #f2f2f2;
+            --text-color: #333;
+            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
+        }
+        
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
@@ -15,13 +32,22 @@
             margin: 50px auto;
             padding: 30px;
             background-color: #fff;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            color: #004281; /* Azul IPN */
+            color: var(--primary-color);
             text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .message {
@@ -29,15 +55,36 @@
             color: #666;
             text-align: center;
             margin: 20px 0;
+            line-height: 1.5;
         }
 
         .profile-section {
-            margin-top: 20px;
+            margin-top: 25px;
+            background-color: var(--light-color);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         .profile-section h2 {
-            color: #004281; /* Azul IPN */
+            color: var(--primary-color);
             margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .profile-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--secondary-color);
+            border-radius: 3px;
         }
 
         .profile-section ul {
@@ -46,22 +93,71 @@
         }
 
         .profile-section li {
-            margin: 10px 0;
-            font-size: 0.9em;
-            color: #333;
+            margin: 15px 0;
+            font-size: 1em;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+        }
+
+        .profile-section li strong {
+            min-width: 80px;
+            display: inline-block;
+            color: var(--primary-dark);
+        }
+
+        .profile-section li span {
+            flex-grow: 1;
+            padding: 8px 12px;
+            background-color: white;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .logout-link {
             display: block;
             text-align: center;
-            margin-top: 20px;
-            color: #004281;
+            margin-top: 25px;
+            padding: 12px 0;
+            color: var(--primary-color);
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
             text-decoration: none;
-            font-size: 0.9em;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
         }
 
         .logout-link:hover {
-            text-decoration: underline;
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 66, 129, 0.2);
+        }
+        
+        .logout-link:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            
+            .profile-section li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .profile-section li strong {
+                margin-bottom: 5px;
+            }
+            
+            .profile-section li span {
+                width: 100%;
+            }
         }
     </style>
 </head>

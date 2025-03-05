@@ -7,16 +7,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #004281; /* Fondo azul IPN */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
-            width: 300px;
-            margin: 50px auto;
+            width: 320px;
             padding: 30px;
             background-color: #fff;
+            border-radius: 8px;
             border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
         }
 
         .register-form {
@@ -25,28 +36,40 @@
 
         .register-form h2 {
             color: #004281; /* Azul IPN */
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            font-size: 1.8em;
+            font-weight: 600;
         }
 
         .message {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #555;
+            margin-bottom: 25px;
         }
 
         .btn-login {
             background-color: #004281; /* Azul IPN */
             color: #fff;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
             width: 100%;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .btn-login:hover {
             background-color: #00355b; /* Azul IPN oscuro */
+            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+        }
+
+        .btn-login:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
 
         .back-to-home {
@@ -55,9 +78,11 @@
             color: #004281;
             text-decoration: none;
             font-size: 0.9em;
+            transition: color 0.2s ease;
         }
 
         .back-to-home:hover {
+            color: #00355b;
             text-decoration: underline;
         }
     </style>

@@ -4,8 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #004281; /* Fondo azul IPN */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+
+        h1 {
+            color: #004281; /* Azul IPN */
+            text-align: center;
+            font-size: 2em;
+            margin: 0;
+            font-weight: 600;
+            padding: 30px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .error-icon {
+            font-size: 80px;
+            color: #e53935;
+            margin-bottom: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background-color: #004281;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #00355b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Noooooo mi compa !</h1>
+    <div class="container">
+        <div class="error-icon">⚠️</div>
+        <h1>Noooooo mi compa !</h1>
+        <a href="/" class="back-link">Regresar al inicio</a>
+    </div>
 </body>
 </html>

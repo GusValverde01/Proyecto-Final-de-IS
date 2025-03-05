@@ -5,19 +5,27 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #004281; /* Fondo azul IPN */
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
             color: #004281; /* Azul IPN */
             text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.8em;
+            font-weight: 600;
         }
 
         a {
             text-decoration: none;
             color: #004281;
+            transition: all 0.3s;
         }
 
         a:hover {
@@ -25,30 +33,44 @@
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
             background-color: #fff;
-            padding: 20px;
-            border: 1px solid #ddd;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         table th,
         table td {
-            border: 1px solid #ddd;
-            padding: 10px;
+            border: none;
+            padding: 12px 15px;
             text-align: left;
         }
 
         table th {
             background-color: #004281; /* Azul IPN */
             color: white;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        table tr {
+            border-bottom: 1px solid #eee;
+        }
+
+        table tr:last-child {
+            border-bottom: none;
         }
 
         table tr:nth-child(even) {
@@ -56,40 +78,83 @@
         }
 
         table tr:hover {
-            background-color: #f1f1f1;
+            background-color: #f0f7ff;
+            transition: background-color 0.2s;
+        }
+
+        .actions {
+            white-space: nowrap;
+            text-align: center;
         }
 
         .actions a {
-            margin-right: 10px;
-            padding: 5px 10px;
+            margin-right: 8px;
+            padding: 6px 12px;
             background-color: #004281; /* Azul IPN */
             color: #fff;
-            border-radius: 3px;
+            border-radius: 4px;
             text-decoration: none;
             font-size: 0.9em;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
 
         .actions a:hover {
             background-color: #00355b; /* Azul IPN oscuro */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .actions a:active {
+            transform: translateY(0);
+        }
+
+        .actions a[style*="background-color: red"] {
+            background-color: #e53935 !important; /* Rojo más armonioso */
+        }
+
+        .actions a[style*="background-color: red"]:hover {
+            background-color: #c62828 !important; /* Rojo más oscuro */
         }
 
         .create-user {
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 15px;
+            padding: 12px 20px;
             background-color: #004281; /* Azul IPN */
             color: white;
-            border-radius: 5px;
+            border-radius: 6px;
             text-decoration: none;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
         }
 
         .create-user:hover {
             background-color: #00355b; /* Azul IPN oscuro */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+        }
+
+        .create-user:active {
+            transform: translateY(0);
         }
 
         .back-link {
             margin-bottom: 20px;
             display: inline-block;
+            color: #004281;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+        }
+
+        .back-link:before {
+            content: "←";
+            margin-right: 5px;
         }
     </style>
 </head>
