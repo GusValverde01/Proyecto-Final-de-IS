@@ -20,7 +20,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         // Obtenemos los roles del usuario autenticado
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority authority : authorities) {
-            if (authority.getAuthority().equals("ADMINISTRADOR")) { // Si es admin
+            if (authority.getAuthority().equals("ROLE_ADMINISTRADOR")) { // Si es admin
                 redirectUrl = "/admin";
                 break;
             }

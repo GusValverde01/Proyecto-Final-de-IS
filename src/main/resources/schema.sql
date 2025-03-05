@@ -70,7 +70,7 @@ CREATE TABLE recomendaciones (
 );
 
 -- Insertar roles iniciales
-INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN'), ('ROLE_USER');
+INSERT INTO roles (nombre) VALUES ('ROLE_ADMINISTRADOR'), ('ROLE_USUARIO');
 
 -- Crear el usuario administrador
 DROP USER IF EXISTS 'admin'@'localhost';

@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin/users")
-@PreAuthorize("hasRole('ADMINISTRADOR')") // Asegura que únicamente administradores accedan
+@PreAuthorize("hasRole('ROLE_ADMINISTRADOR')") // Asegura que únicamente administradores accedan
 public class AdminUserController {
 
 @Autowired

@@ -34,7 +34,7 @@ public class UsuarioService {
 
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
 
-        Optional<Rol> optionalRol = rolRepository.findByNombre("USUARIO");
+        Optional<Rol> optionalRol = rolRepository.findByNombre("ROLE_USUARIO");
         if (optionalRol.isPresent()) {
             Set<Rol> roles = new HashSet<>();
             roles.add(optionalRol.get());
