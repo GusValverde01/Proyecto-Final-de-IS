@@ -41,6 +41,13 @@
             font-weight: 600;
         }
 
+        .gif {
+            display: block;
+            margin: 0 auto 20px auto;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
         .message {
             font-size: 1.1em;
             line-height: 1.5;
@@ -90,7 +97,9 @@
 <body>
     <div class="container">
         <div class="register-form">
-            <h2>Registro Exitoso</h2>
+            <!-- GIF agregado -->
+            <img src="https://i.redd.it/zivj0410iigd1.gif" alt="GIF de celebración" class="gif">
+            <h2>¡Registro Exitoso!</h2>
             <p class="message">Has sido registrado con éxito. Ahora puedes iniciar sesión con tu cuenta.</p>
             <button type="button" class="btn-login" onclick="location.href='/login'">Iniciar Sesión</button>
         </div>
