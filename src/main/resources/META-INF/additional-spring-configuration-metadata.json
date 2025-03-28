@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "igdb.client.id",
+    "type": "java.lang.String",
+    "description": "A description for 'igdb.client.id'"
+  },
+  {
+    "name": "igdb.token",
+    "type": "java.lang.String",
+    "description": "A description for 'igdb.token'"
+  },
+  {
+    "name": "mal.client.id",
+    "type": "java.lang.String",
+    "description": "A description for 'mal.client.id'"
+  }
+]}

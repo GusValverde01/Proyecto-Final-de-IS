@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Búsqueda de Contenido</title>
+    <style>
+        :root {
+            --primary-color: #004281;
+            --primary-dark: #00325e;
+            --secondary-color: #6c9c2f;
+            --light-color: #f9f9f9;
+            --text-color: #333;
+            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: var(--primary-dark);
+        }
+
+        input, select, button {
+            padding: 10px;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--primary-dark);
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #5f892c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Buscar Contenido</h1>
+        <form th:action="@{/search/results}" method="get">
+            <label for="query">Palabra clave:</label>
+            <input type="text" id="query" name="query" placeholder="Escribe algo..." required />
+            
+            <label for="type">Tipo:</label>
+            <select id="type" name="type" required>
+                <option value="libro">Libros</option>
+                <option value="serie">Series</option>
+                <option value="videojuego">Videojuegos</option>
+                <option value="anime">Anime</option>
+            </select>
+            
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+</body>
+</html>

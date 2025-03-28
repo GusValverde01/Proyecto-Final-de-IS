@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados de Búsqueda</title>
+    <style>
+        :root {
+            --primary-color: #004281;
+            --primary-dark: #00325e;
+            --secondary-color: #6c9c2f;
+            --light-color: #f9f9f9;
+            --text-color: #333;
+            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            background-color: var(--light-color);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        li p {
+            margin: 5px 0;
+            color: var(--text-color);
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #fff;
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            background-color: #5f892c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultados para "<span th:text="${query}"></span>":</h1>
+        <ul>
+            <li th:each="result : ${results}">
+                <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+            </li>
+        </ul>
+        <a class="back-link" th:href="@{/search}">Nueva búsqueda</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Historial de Búsquedas</title>
+    <style>
+        :root {
+            --primary-color: #004281;
+            --primary-dark: #00325e;
+            --secondary-color: #6c9c2f;
+            --light-color: #f9f9f9;
+            --text-color: #333;
+            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        td {
+            background-color: var(--light-color);
+            color: var(--text-color);
+        }
+
+        tr:nth-child(odd) td {
+            background-color: #f0f8ff;
+        }
+
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #fff;
+            background-color: var(--secondary-color);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background-color: #5f892c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Historial de Búsquedas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Búsqueda</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item, iterStat : ${historial}">
+                    <td th:text="${iterStat.count}"></td>
+                    <td th:text="${item.busqueda}"></td>
+                    <td th:text="${#temporals.format(item.fecha, 'dd/MM/yyyy HH:mm')}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <a th:href="@{/search}">Realizar nueva búsqueda</a>
+    </div>
+</body>
+</html>
