@@ -87,15 +87,16 @@
 <body>
     <div class="container">
         <h1>Resultados para "<span th:text="${query}"></span>":</h1>
-        <ul>
-            <li th:each="result : ${results}">
-                <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-            </li>
-        </ul>
+        <!-- Example for displaying multiple categories -->
+<ul>
+    <li th:each="result : ${results}">
+        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+    </li>
+</ul>
         <a class="back-link" th:href="@{/search}">Nueva búsqueda</a>
     </div>
 </body>

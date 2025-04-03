@@ -3,7 +3,11 @@ package equipo.proyecto.auth.service;
 import equipo.proyecto.auth.model.ResultadoBusqueda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -135,26 +139,36 @@ public class ContentSearchService {
             HttpHeaders headers = new HttpHeaders();
             headers.set("X-MAL-CLIENT-ID", malClientId);
 
-            HttpEntity<Void> entity = new HttpEntity<>(headers);
-            String url = MAL_SEARCH_API + "?q=" + query.replace(" ", "+") + "&limit=10";
-
+            String url = MAL_SEARCH_API + "?q=" + query;
+            HttpEntity<String> entity = new HttpEntity<>(headers);
             ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
 
-            List<Map<String, Object>> animeList = (List<Map<String, Object>>) response.getBody().get("data");
-            for (Map<String, Object> animeEntry : animeList) {
-                Map<String, Object> anime = (Map<String, Object>) animeEntry.get("node");
+            List<Map<String, Object>> data = (List<Map<String, Object>>) response.getBody().get("data");
+            if (data != null) {
+                for (Map<String, Object> item : data) {
+                    Map<String, Object> node = (Map<String, Object>) item.get("node");
+                    String titulo = (String) node.get("title");
+                    String sinopsis = node.get("synopsis") != null ? node.get("synopsis").toString() : "Sin sinopsis disponible.";
+                    String puntuacion = node.get("mean") != null ? node.get("mean").toString() : "N/A";
+                    String autor = "Anime";
+                    String enlace = node.get("url") != null ? node.get("url").toString() : "#";
 
-                String titulo = (String) anime.get("title");
-                String sinopsis = anime.get("synopsis") != null ? anime.get("synopsis").toString() : "Sin sinopsis.";
-                String enlace = (String) anime.get("url");
-                String puntuacion = "N/A";
-                String autor = "Anime";
-
-                resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                    resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return resultados;
+    }
+
+    // Método para la búsqueda en todas las categorías
+    public List<ResultadoBusqueda> searchAllCategories(String query) {
+        List<ResultadoBusqueda> allResults = new ArrayList<>();
+        allResults.addAll(searchBooks(query));
+        allResults.addAll(searchSeries(query));
+        allResults.addAll(searchVideoGames(query));
+        allResults.addAll(searchAnime(query));
+        return allResults;
     }
 }
