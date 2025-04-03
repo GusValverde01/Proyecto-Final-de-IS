@@ -4,17 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Usuario</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
-        /* Mantenemos el estilo que ya tienes */
-        :root {
-            --primary-color: #004281; /* Azul IPN */
-            --primary-dark: #00325e;
-            --secondary-color: #6c9c2f; /* Verde complementario */
-            --light-color: #f9f9f9;
-            --gray-light: #f2f2f2;
-            --text-color: #333;
-            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
-        }
+        /* Modified styles to use theme variables */
         body {
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
@@ -24,14 +16,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            color: var(--text-primary);
         }
         .container {
             width: 400px;
             margin: 50px auto;
             padding: 30px;
-            background-color: #fff;
+            background-color: var(--bg-primary);
             border-radius: 15px;
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 24px var(--shadow-color);
             animation: fadeIn 0.8s ease;
         }
         h1 {
@@ -43,14 +36,17 @@
         }
         .profile-section {
             margin-top: 25px;
-            background-color: var(--light-color);
+            background-color: var(--bg-secondary);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px var(--shadow-color);
         }
         .profile-section h2 {
             color: var(--primary-color);
             margin-bottom: 20px;
+        }
+        .message {
+            color: var(--text-secondary);
         }
         .button-group {
             display: flex;
@@ -67,13 +63,13 @@
             font-size: 1rem;
             border-radius: 8px;
             transition: all 0.3s;
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
         .button-search {
             background-color: var(--secondary-color);
         }
         .button-search:hover {
-            background-color: #5f892c;
+            background-color: var(--secondary-dark);
         }
         .button-history {
             background-color: var(--primary-dark);
@@ -116,6 +112,15 @@
                 <li><strong>Rol:</strong> <span th:text="${rol}"></span></li>
             </ul>
         </div>
+        <!-- Theme Switcher -->
+        <div class="theme-switcher">
+            <span class="theme-switcher-label">Tema:</span>
+            <select id="theme-select">
+                <option value="light">Claro</option>
+                <option value="dark">Oscuro</option>
+                <option value="system">Sistema</option>
+            </select>
+        </div>
 
         <!-- NUEVA SECCIÓN DE BOTONES -->
         <div class="button-group">
@@ -129,5 +134,7 @@
         <!-- Botón para cerrar sesión -->
         <a href="/logout" class="logout-link">Cerrar sesión</a>
     </div>
+    
+    <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

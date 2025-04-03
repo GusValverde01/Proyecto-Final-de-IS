@@ -1,0 +1,66 @@
+:root {
+  /* Light theme (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f9f9;
+  --bg-tertiary: #f2f2f2;
+  --text-primary: #333333;
+  --text-secondary: #666666;
+  --primary-color: #004281;
+  --primary-dark: #00325e;
+  --secondary-color: #6c9c2f;
+  --secondary-dark: #588021;
+  --border-color: #ddd;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+  --card-bg: #ffffff;
+  --input-bg: #f9f9f9;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #121212;
+  --bg-secondary: #1e1e1e;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --primary-color: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --secondary-color: #7cbb30;
+  --secondary-dark: #69a128;
+  --border-color: #444;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --card-bg: #2d2d2d;
+  --input-bg: #333333;
+}
+
+/* Add smooth transitions between themes */
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme switcher styles */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.theme-switcher-label {
+  margin-right: 10px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.theme-switcher select {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.theme-switcher select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}

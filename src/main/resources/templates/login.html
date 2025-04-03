@@ -4,42 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login ESCOM</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
-        :root {
-            --primary-color: #004281;
-            --primary-dark: #00325e;
-            --secondary-color: #6c9c2f;
-            --secondary-dark: #588021;
-            --light-color: #f9f9f9;
-            --gray-light: #eaeaea;
-            --gray-medium: #c4c4c4;
-            --shadow: 0 8px 24px rgba(0, 66, 129, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-        }
-
         body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            color: var(--text-primary);
         }
 
         .container {
             width: 420px;
-            background-color: white;
+            background-color: var(--bg-primary);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: 0 8px 24px var(--shadow-color);
             animation: fadeIn 0.8s ease;
+            /* Eliminar margen que puede causar desplazamiento */
+            margin: 0;
         }
+
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -47,10 +36,10 @@
         }
 
         .header {
-            background-color: var(--light-color);
+            background-color: var(--bg-secondary);
             padding: 25px;
             text-align: center;
-            border-bottom: 1px solid var(--gray-light);
+            border-bottom: 1px solid var(--border-color);
         }
 
         .escudo {
@@ -66,6 +55,7 @@
 
         .login-form {
             padding: 30px 40px;
+            color: var(--text-primary);
         }
 
         .login-form h2 {
@@ -84,7 +74,7 @@
         .input-group label {
             display: block;
             margin-bottom: 8px;
-            color: #555;
+            color: var(--text-secondary);
             font-weight: 500;
             font-size: 14px;
         }
@@ -93,9 +83,11 @@
             width: 100%;
             height: 48px;
             padding: 10px 15px;
-            border: 2px solid var(--gray-light);
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 16px;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
             transition: all 0.3s ease;
         }
 
@@ -106,7 +98,7 @@
         }
 
         .input-group input::placeholder {
-            color: var(--gray-medium);
+            color: var(--text-secondary);
         }
 
         /* Estilos para el campo de contraseña */
@@ -120,7 +112,7 @@
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
-            color: #777;
+            color: var(--text-secondary);
             font-size: 14px;
             user-select: none;
             display: flex;
@@ -154,7 +146,7 @@
         .btn-login:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 66, 129, 0.2);
+            box-shadow: 0 5px 15px var(--shadow-color);
         }
 
         .btn-login:active {
@@ -183,7 +175,7 @@
         .btn-register:hover {
             background-color: var(--secondary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(108, 156, 47, 0.2);
+            box-shadow: 0 5px 15px var(--shadow-color);
         }
 
         .divider {
@@ -197,12 +189,12 @@
             content: '';
             flex: 1;
             height: 1px;
-            background-color: var(--gray-light);
+            background-color: var(--border-color);
         }
 
         .divider span {
             padding: 0 10px;
-            color: #777;
+            color: var(--text-secondary);
             font-size: 14px;
         }
 
@@ -251,7 +243,15 @@
             </div>
         </div>
     </div>
-
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <span class="theme-switcher-label">Tema:</span>
+        <select id="theme-select">
+            <option value="light">Claro</option>
+            <option value="dark">Oscuro</option>
+            <option value="system">Sistema</option>
+        </select>
+    </div>
     <script>
         function togglePassword() {
             const passwordField = document.getElementById('password');
@@ -266,5 +266,7 @@
             }
         }
     </script>
+    <script src="/js/theme-switcher.js"></script>
+
 </body>
 </html>

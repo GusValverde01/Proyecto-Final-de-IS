@@ -4,39 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Administrador</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
-        :root {
-            --primary-color: #004281; /* Azul IPN */
-            --primary-dark: #00355b;
-            --white: #ffffff;
-            --light-gray: #f2f2f2;
-            --text-dark: #333333;
-            --text-gray: #666666;
-        }
-
-        * {
+        body {
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            min-height: 100vh;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--primary-color);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-        }
+            color: var(--text-primary);
+            }
 
         .container {
             width: 100%;
             max-width: 450px;
             padding: 35px;
-            background-color: var(--white);
+            background-color: var(--bg-primary);
             border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px var(--shadow-color);
         }
 
         h1 {
@@ -50,7 +38,7 @@
 
         .message {
             font-size: 1.1em;
-            color: var(--text-gray);
+            color: var(--text-secondary);
             text-align: center;
             margin: 20px 0;
             line-height: 1.4;
@@ -58,7 +46,7 @@
 
         .profile-section {
             margin-top: 25px;
-            background-color: var(--light-gray);
+            background-color: var(--bg-secondary);
             padding: 15px;
             border-radius: 6px;
         }
@@ -78,9 +66,9 @@
         .profile-section li {
             margin: 12px 0;
             font-size: 1em;
-            color: var(--text-dark);
+            color: var(--text-primary);
             padding: 5px 0;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .profile-section li:last-child {
@@ -115,20 +103,20 @@
         .menu a {
             display: block;
             background-color: var(--primary-color);
-            color: var(--white);
+            color: white;
             padding: 12px 20px;
             border-radius: 5px;
             text-decoration: none;
             text-align: center;
             transition: all 0.3s ease;
             font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px var(--shadow-color);
         }
 
         .menu a:hover {
             background-color: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px var(--shadow-color);
         }
 
         .logout-link {
@@ -146,11 +134,26 @@
 
         .logout-link:hover {
             background-color: var(--primary-color);
-            color: var(--white);
+            color: white;
+        }
+
+        /* Theme switcher - posicionamiento específico para admin */
+        .theme-switcher {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
         }
     </style>
 </head>
 <body>
+    <!-- Selector de tema -->
+    <div class="theme-switcher">
+        <div class="theme-selector">
+            <div class="theme-option light" onclick="setTheme('light')">Claro</div>
+            <div class="theme-option dark" onclick="setTheme('dark')">Oscuro</div>
+            <div class="theme-option system" onclick="setTheme('system')">Sistema</div>
+        </div>
+    </div>
     <div class="container">
         <h1>Bienvenido, Administrador</h1>
         <div class="message">
@@ -175,5 +178,6 @@
 
         <a href="/logout" class="logout-link">Cerrar sesión</a>
     </div>
+    <script src="/js/theme-switcher.js"></script>
 </body>
 </html>
