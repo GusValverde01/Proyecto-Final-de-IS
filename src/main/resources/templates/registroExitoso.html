@@ -4,30 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro Exitoso</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #004281; /* Fondo azul IPN */
+            background-color: var(--bg-primary); /* Fondo del tema */
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            color: var(--text-primary);
         }
 
         .container {
             width: 320px;
             padding: 30px;
-            background-color: #fff;
+            background-color: var(--bg-secondary);
             border-radius: 8px;
-            border: 1px solid #ddd;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
             transition: box-shadow 0.3s ease;
         }
 
         .container:hover {
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
         }
 
         .register-form {
@@ -35,7 +37,7 @@
         }
 
         .register-form h2 {
-            color: #004281; /* Azul IPN */
+            color: var(--primary-color);
             margin-bottom: 24px;
             font-size: 1.8em;
             font-weight: 600;
@@ -51,13 +53,13 @@
         .message {
             font-size: 1.1em;
             line-height: 1.5;
-            color: #555;
+            color: var(--text-secondary);
             margin-bottom: 25px;
         }
 
         .btn-login {
-            background-color: #004281; /* Azul IPN */
-            color: #fff;
+            background-color: var(--primary-color);
+            color: var(--text-primary);
             padding: 12px 20px;
             border: none;
             border-radius: 5px;
@@ -66,30 +68,30 @@
             font-size: 1em;
             font-weight: 500;
             transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .btn-login:hover {
-            background-color: #00355b; /* Azul IPN oscuro */
-            box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+            background-color: var(--primary-dark);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
         }
 
         .btn-login:active {
             transform: translateY(1px);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
 
         .back-to-home {
             display: block;
             margin-top: 20px;
-            color: #004281;
+            color: var(--primary-color);
             text-decoration: none;
             font-size: 0.9em;
             transition: color 0.2s ease;
         }
 
         .back-to-home:hover {
-            color: #00355b;
+            color: var(--primary-dark);
             text-decoration: underline;
         }
     </style>
@@ -104,5 +106,15 @@
             <button type="button" class="btn-login" onclick="location.href='/login'">Iniciar Sesión</button>
         </div>
     </div>
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <span class="theme-switcher-label">Tema:</span>
+        <select id="theme-select">
+            <option value="light">Claro</option>
+            <option value="dark">Oscuro</option>
+            <option value="system">Sistema</option>
+        </select>
+    </div>
+    <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

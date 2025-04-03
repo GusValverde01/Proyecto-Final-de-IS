@@ -2,24 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Crear Usuario</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
-        :root {
-            --primary-color: #004281; /* Azul IPN */
-            --primary-dark: #00335a;
-            --white: #ffffff;
-            --light-gray: #f2f2f2;
-            --text-dark: #333333;
-            --border-color: #dddddd;
-            --input-border: #cccccc;
-            --input-focus-shadow: rgba(0, 66, 129, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
             background-color: var(--primary-color);
@@ -35,7 +19,7 @@
             width: 100%;
             max-width: 500px;
             margin: 30px auto;
-            background-color: var(--white);
+            background-color: var(--bg-primary);
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -91,7 +75,8 @@
             border: 1px solid var(--input-border);
             border-radius: 6px;
             transition: all 0.3s ease;
-            background-color: var(--light-gray);
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
         }
 
         input[type="text"]:focus,
@@ -185,5 +170,15 @@
             </div>
         </form>
     </div>
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <span class="theme-switcher-label">Tema:</span>
+        <select id="theme-select">
+            <option value="light">Claro</option>
+            <option value="dark">Oscuro</option>
+            <option value="system">Sistema</option>
+        </select>
+    </div>
+    <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

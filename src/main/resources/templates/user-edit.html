@@ -2,20 +2,22 @@
 <html>
 <head>
     <title>Editar Usuario</title>
+    <link rel="stylesheet" href="/css/theme.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #004281; /* Fondo azul IPN */
+            background-color: var(--bg-primary);
             margin: 0;
             padding: 0;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: var(--text-primary);
         }
 
         h1 {
-            color: #004281; /* Azul IPN */
+            color: var(--primary-color);
             text-align: center;
             margin-bottom: 25px;
             font-size: 1.8em;
@@ -24,24 +26,24 @@
 
         a {
             text-decoration: none;
-            color: #004281;
+            color: var(--primary-color);
             font-size: 0.9em;
             transition: color 0.3s;
         }
 
         a:hover {
             text-decoration: underline;
-            color: #00335a;
+            color: var(--primary-dark);
         }
 
         .container {
             width: 90%;
             max-width: 500px;
             margin: 30px auto;
-            background-color: #fff;
+            background-color: var(--bg-secondary);
             padding: 30px;
             border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
             position: relative;
         }
 
@@ -56,7 +58,7 @@
 
         label {
             font-size: 1em;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 8px;
             display: block;
             font-weight: 500;
@@ -68,22 +70,24 @@
             width: 100%;
             padding: 12px;
             font-size: 1em;
-            border: 2px solid #e0e0e0;
+            border: 2px solid var(--border-color);
             border-radius: 6px;
             box-sizing: border-box;
             transition: all 0.3s;
+            background-color: var(--bg-tertiary);
+            color: var(--text-primary);
         }
 
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="password"]:focus {
-            border-color: #004281;
+            border-color: var(--primary-color);
             outline: none;
             box-shadow: 0 0 0 3px rgba(0, 66, 129, 0.2);
         }
 
         button {
-            background-color: #004281; /* Azul IPN */
+            background-color: var(--primary-color);
             color: white;
             border: none;
             padding: 14px 20px;
@@ -93,11 +97,11 @@
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
 
         button:hover {
-            background-color: #00335a; /* Azul más oscuro */
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
@@ -109,7 +113,7 @@
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
-            color: #004281;
+            color: var(--primary-color);
             font-weight: 500;
             display: flex;
             align-items: center;
@@ -142,5 +146,15 @@
             <button type="submit">Guardar</button>
         </form>
     </div>
+    <!-- Theme Switcher -->
+    <div class="theme-switcher">
+        <span class="theme-switcher-label">Tema:</span>
+        <select id="theme-select">
+            <option value="light">Claro</option>
+            <option value="dark">Oscuro</option>
+            <option value="system">Sistema</option>
+        </select>
+    </div>
+    <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

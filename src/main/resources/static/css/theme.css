@@ -64,3 +64,101 @@ body {
   outline: none;
   border-color: var(--primary-color);
 }
+
+/* Estilos para el selector de tema */
+.theme-switcher {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+}
+
+#theme-toggle {
+  background-color: var(--bg-secondary);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  transition: transform 0.2s, background-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+#theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-primary);
+  position: absolute;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Mostrar icono según el tema actual */
+html[data-theme="light"] #theme-toggle .sun-icon,
+html:not([data-theme]) #theme-toggle .sun-icon {
+  opacity: 1;
+}
+
+html[data-theme="dark"] #theme-toggle .moon-icon {
+  opacity: 1;
+}
+
+html[data-theme="system"] #theme-toggle .system-icon {
+  opacity: 1;
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: var(--bg-primary);
+  border-radius: 8px;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  width: 140px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+
+.theme-switcher:hover .theme-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-option:hover {
+  background-color: var(--bg-secondary);
+}
+
+.theme-icon {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* Indicador de tema seleccionado */
+html[data-theme="light"] .theme-option[data-theme="light"],
+html:not([data-theme]) .theme-option[data-theme="light"],
+html[data-theme="dark"] .theme-option[data-theme="dark"],
+html[data-theme="system"] .theme-option[data-theme="system"] {
+  background-color: var(--primary-color);
+  color: white;
+}
