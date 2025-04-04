@@ -16,7 +16,7 @@
         }
 
         .container {
-            width: 600px;
+            width: 800px; /* Aumentado para mostrar mejor las categorías */
             margin: 50px auto;
             padding: 30px;
             background-color: var(--bg-primary);
@@ -27,6 +27,24 @@
         h1 {
             color: var(--primary-color);
             text-align: center;
+        }
+        
+        h2 {
+            color: var(--secondary-color);
+            margin-top: 25px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 10px;
+        }
+
+        .category-section {
+            margin-bottom: 30px;
+        }
+        
+        .category-empty {
+            font-style: italic;
+            color: var(--text-muted);
+            text-align: center;
+            padding: 15px;
         }
 
         ul {
@@ -79,18 +97,94 @@
 <body>
     <div class="container">
         <h1>Resultados para "<span th:text="${query}"></span>":</h1>
-        <!-- Example for displaying multiple categories -->
-<ul>
-    <li th:each="result : ${results}">
-        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-    </li>
-</ul>
+        
+        <!-- Para búsqueda por categoría específica -->
+        <div th:if="${!isAllSearch}">
+            <ul>
+                <li th:each="result : ${results}">
+                    <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                    <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                    <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                    <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                    <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Para búsqueda en todas las categorías -->
+        <div th:if="${isAllSearch}">
+            <!-- Sección de Libros -->
+            <div class="category-section">
+                <h2>Libros</h2>
+                <ul th:if="${!categorizedResults.libros.empty}">
+                    <li th:each="result : ${categorizedResults.libros}">
+                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+                    </li>
+                </ul>
+                <div class="category-empty" th:if="${categorizedResults.libros.empty}">
+                    No se encontraron resultados en libros para esta búsqueda.
+                </div>
+            </div>
+            
+            <!-- Sección de Series -->
+            <div class="category-section">
+                <h2>Series</h2>
+                <ul th:if="${!categorizedResults.series.empty}">
+                    <li th:each="result : ${categorizedResults.series}">
+                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+                    </li>
+                </ul>
+                <div class="category-empty" th:if="${categorizedResults.series.empty}">
+                    No se encontraron resultados en series para esta búsqueda.
+                </div>
+            </div>
+            
+            <!-- Sección de Videojuegos -->
+            <div class="category-section">
+                <h2>Videojuegos</h2>
+                <ul th:if="${!categorizedResults.videojuegos.empty}">
+                    <li th:each="result : ${categorizedResults.videojuegos}">
+                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+                    </li>
+                </ul>
+                <div class="category-empty" th:if="${categorizedResults.videojuegos.empty}">
+                    No se encontraron resultados en videojuegos para esta búsqueda.
+                </div>
+            </div>
+            
+            <!-- Sección de Anime -->
+            <div class="category-section">
+                <h2>Anime</h2>
+                <ul th:if="${!categorizedResults.anime.empty}">
+                    <li th:each="result : ${categorizedResults.anime}">
+                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
+                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
+                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
+                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
+                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
+                    </li>
+                </ul>
+                <div class="category-empty" th:if="${categorizedResults.anime.empty}">
+                    No se encontraron resultados en anime para esta búsqueda.
+                </div>
+            </div>
+        </div>
+        
         <a class="back-link" th:href="@{/search}">Nueva búsqueda</a>
     </div>
+
     <!-- Theme Switcher -->
 <div class="theme-switcher">
     <button id="theme-toggle" aria-label="Cambiar tema">

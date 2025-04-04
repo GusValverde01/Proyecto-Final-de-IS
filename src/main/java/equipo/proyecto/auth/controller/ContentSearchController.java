@@ -8,6 +8,8 @@ import equipo.proyecto.auth.service.ContentSearchService;
 import equipo.proyecto.auth.model.ResultadoBusqueda;
 
 import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -35,52 +37,64 @@ public class ContentSearchController {
         return "search"; // Página de búsqueda
     }
 
-// Realizar búsqueda con tipos adicionales y registrar historial
-@GetMapping("/search/results")
-public String searchResults(
-        @RequestParam("query") String query,
-        @RequestParam("type") String type,  // Tipo: libro, serie, videojuego, anime, all
-        Model model,
-        Authentication authentication // Información del usuario autenticado
-) {
-    List<ResultadoBusqueda> resultados;
-    switch (type.toLowerCase()) {
-        case "libro":
-            resultados = searchService.searchBooks(query);
-            break;
-        case "serie":
-            resultados = searchService.searchSeries(query);
-            break;
-        case "videojuego":
-            resultados = searchService.searchVideoGames(query);
-            break;
-        case "anime":
-            resultados = searchService.searchAnime(query);
-            break;
-        case "all":
-            resultados = searchService.searchAllCategories(query); // New case
-            break;
-        default:
-            model.addAttribute("error", "Tipo de búsqueda no reconocido.");
-            return "search";
-    }
-    model.addAttribute("results", resultados);
-    model.addAttribute("query", query);
-    model.addAttribute("type", type);
-
-    // Registrar historial
-    if (authentication != null && authentication.isAuthenticated()) {
-        String username = authentication.getName(); // Nombre del usuario
-        Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
-
-        if (usuario != null) {
-            Historial historial = new Historial(usuario.getId(), query);
-            historialRepository.save(historial);
+    // Realizar búsqueda con tipos adicionales y registrar historial
+    @GetMapping("/search/results")
+    public String searchResults(
+            @RequestParam("query") String query,
+            @RequestParam("type") String type,  // Tipo: libro, serie, videojuego, anime, all
+            Model model,
+            Authentication authentication // Información del usuario autenticado
+    ) {
+        if (type.equalsIgnoreCase("all")) {
+            // Para "todos", obtenemos resultados categorizados
+            Map<String, List<ResultadoBusqueda>> categorizedResults = new HashMap<>();
+            categorizedResults.put("libros", searchService.searchBooks(query));
+            categorizedResults.put("series", searchService.searchSeries(query));
+            categorizedResults.put("videojuegos", searchService.searchVideoGames(query));
+            categorizedResults.put("anime", searchService.searchAnime(query));
+            
+            model.addAttribute("categorizedResults", categorizedResults);
+            model.addAttribute("isAllSearch", true);
+        } else {
+            // Para búsqueda de categoría específica, mantener comportamiento actual
+            List<ResultadoBusqueda> resultados;
+            switch (type.toLowerCase()) {
+                case "libro":
+                    resultados = searchService.searchBooks(query);
+                    break;
+                case "serie":
+                    resultados = searchService.searchSeries(query);
+                    break;
+                case "videojuego":
+                    resultados = searchService.searchVideoGames(query);
+                    break;
+                case "anime":
+                    resultados = searchService.searchAnime(query);
+                    break;
+                default:
+                    model.addAttribute("error", "Tipo de búsqueda no reconocido.");
+                    return "search";
+            }
+            model.addAttribute("results", resultados);
+            model.addAttribute("isAllSearch", false);
         }
-    }
+        
+        model.addAttribute("query", query);
+        model.addAttribute("type", type);
 
-    return "searchResults"; // Página para mostrar los resultados
-}
+        // Registrar historial
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName(); // Nombre del usuario
+            Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
+
+            if (usuario != null) {
+                Historial historial = new Historial(usuario.getId(), query);
+                historialRepository.save(historial);
+            }
+        }
+
+        return "searchResults"; // Página para mostrar los resultados
+    }
 
     // Método de vista del historial de búsqueda
     @GetMapping("/search/history")
