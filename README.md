@@ -40,29 +40,33 @@ El proyecto está organizado de la siguiente manera:
 
 ## Evidencias de Funcionamiento
 
-### Proceso de Registro y Login
+### Proceso de Registro, Login y Busqueda
 
 - Página de Login
-![image](https://github.com/user-attachments/assets/6181c17d-cca7-4c5b-ac49-0e0afd85d278)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225723.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225733.png?raw=true)
 
 - Página de Registro de Nuevo Usuario
-![image](https://github.com/user-attachments/assets/35c4088d-07a7-4acf-a00a-40266ac66e25)
-![image](https://github.com/user-attachments/assets/3d5728ce-6133-487c-bdb5-eb5e853a2586)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225815.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225837.png?raw=true)
+
+- Página de home
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225856.png?raw=true)
 
 ### Funcionamiento del Caso de Uso Principal
 
-- Vista del Administrador
-![image](https://github.com/user-attachments/assets/0a549380-10d2-45ea-9041-5edbca64e041)
-![image](https://github.com/user-attachments/assets/72407871-6637-4775-89a2-618fef42d1f7)
+- Historial de busquedas
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225902.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225908.png?raw=true)
 
-- Edición de Usuario
-![image](https://github.com/user-attachments/assets/92c07ef6-0c54-4953-abde-e66bfefa1610)
+- Buscar contenido
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225922.png?raw=true)
 
-- Creación de Usuario
-![image](https://github.com/user-attachments/assets/fb6c4a5f-9b5e-425e-b5e2-f290842667e0)
-
-- Vista del Usuario
-![image](https://github.com/user-attachments/assets/6285b6a5-ab1d-455e-8049-c5b66bfe03e6)
+- Resultados generales
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225933.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225938.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225945.png?raw=true)
+![image](https://github.com/GusValverde01/Proyecto-Final-de-IS/blob/main/Capturas/Screenshot%202025-04-04%20225952.png?raw=true)
 
 ### Diferencia de Permisos entre Roles
 
@@ -101,13 +105,15 @@ El proyecto está organizado de la siguiente manera:
 
 ## Cómo Ejecutar el Proyecto
 
-1. Clona el repositorio con:
+1. **Clonar el repositorio:**
    ```sh
    git clone https://github.com/GusValverde01/Proyecto-Final-de-IS.git
 
-![image](https://github.com/user-attachments/assets/6285b6a5-ab1d-455e-8049-c5b66bfe03e6)
-
-
-
-
-
+2. **Compilar con maven:**
+    ```sh
+    mvn spring-boot:run
+    ```
+3. **Acceder al endpoint:**
+    ```
+    En el navegadr: http://localhost:8080/login
+    ```
