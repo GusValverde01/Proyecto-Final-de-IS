@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
     "equipo.proyecto.auth.config",
     "equipo.proyecto.auth.controller",
     "equipo.proyecto.auth.entity",
+    "equipo.proyecto.auth.model",
     "equipo.proyecto.auth.repository",
     "equipo.proyecto.auth.service",
     "equipo.proyecto.auth.SistemaAutenticacion"
