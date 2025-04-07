@@ -109,6 +109,20 @@ El proyecto está organizado de la siguiente manera:
    ```sh
    git clone https://github.com/GusValverde01/Proyecto-Final-de-IS.git
 
+2. **Ejecuta la aplicación con Docker Compose:**
+    ```sh
+    docker-compose up --build
+    ```
+3. **Acceder al endpoint:**
+    ```
+    En el navegadr: http://localhost:8080/login
+    ```
+## Cómo Ejecutar el Proyecto si prefieres no usar Docker
+
+1. **Clonar el repositorio:**
+   ```sh
+   git clone https://github.com/GusValverde01/Proyecto-Final-de-IS.git
+
 2. **Compilar con maven:**
     ```sh
     mvn spring-boot:run
