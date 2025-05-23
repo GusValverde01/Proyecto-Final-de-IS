@@ -49,6 +49,7 @@ public class ContentSearchService {
             // Procesar la respuesta y extraer libros
             List<Map<String, Object>> docs = (List<Map<String, Object>>) response.get("docs");
             if (docs != null) {
+                long idCounter = 1; // Identificador temporal
                 for (Map<String, Object> doc : docs) {
                     String titulo = (String) doc.get("title");
                     String autor = doc.get("author_name") != null
@@ -62,7 +63,7 @@ public class ContentSearchService {
                             ? "https://openlibrary.org" + doc.get("key")
                             : "#";
 
-                    resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                    resultados.add(new ResultadoBusqueda(idCounter++, titulo, autor, sinopsis, puntuacion, enlace));
                     if (resultados.size() >= 10) break; // Máximo 10 resultados
                 }
             }
@@ -81,6 +82,7 @@ public class ContentSearchService {
             String url = TVMAZE_SEARCH_API_URL + query.replace(" ", "+");
             List<Map<String, Object>> response = restTemplate.getForObject(url, List.class);
 
+            long idCounter = 1; // Identificador temporal
             for (Map<String, Object> item : response) {
                 Map<String, Object> show = (Map<String, Object>) item.get("show");
                 String titulo = (String) show.get("name");
@@ -91,7 +93,7 @@ public class ContentSearchService {
                 String autor = "TV Series";
                 String enlace = (String) show.get("url");
 
-                resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                resultados.add(new ResultadoBusqueda(idCounter++, titulo, autor, sinopsis, puntuacion, enlace));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,6 +117,7 @@ public class ContentSearchService {
             ResponseEntity<List> response = restTemplate.exchange(IGDB_SEARCH_URL, HttpMethod.POST, entity, List.class);
 
             List<Map<String, Object>> games = response.getBody();
+            long idCounter = 1; // Identificador temporal
             for (Map<String, Object> game : games) {
                 String titulo = (String) game.get("name");
                 String sinopsis = game.get("summary") != null ? game.get("summary").toString() : "Sin sinopsis disponible.";
@@ -122,7 +125,7 @@ public class ContentSearchService {
                 String autor = "Videojuego";
                 String enlace = game.get("url") != null ? game.get("url").toString() : "#";
 
-                resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                resultados.add(new ResultadoBusqueda(idCounter++, titulo, autor, sinopsis, puntuacion, enlace));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -144,6 +147,7 @@ public class ContentSearchService {
             ResponseEntity<Map> response = restTemplate.exchange(url, HttpMethod.GET, entity, Map.class);
 
             List<Map<String, Object>> data = (List<Map<String, Object>>) response.getBody().get("data");
+            long idCounter = 1; // Identificador temporal
             if (data != null) {
                 for (Map<String, Object> item : data) {
                     Map<String, Object> node = (Map<String, Object>) item.get("node");
@@ -153,7 +157,7 @@ public class ContentSearchService {
                     String autor = "Anime";
                     String enlace = node.get("url") != null ? node.get("url").toString() : "#";
 
-                    resultados.add(new ResultadoBusqueda(titulo, autor, sinopsis, puntuacion, enlace));
+                    resultados.add(new ResultadoBusqueda(idCounter++, titulo, autor, sinopsis, puntuacion, enlace));
                 }
             }
         } catch (Exception e) {

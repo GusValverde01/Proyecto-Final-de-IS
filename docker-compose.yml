@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: proyecto-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/proyectosistema?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=760320
+    networks:
+      - proyecto-network
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3307:3306"  # Cambiado de 3306:3306 a 3307:3306
+    environment:
+      - MYSQL_DATABASE=proyectosistema
+      - MYSQL_ROOT_PASSWORD=760320
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - proyecto-network
+    restart: unless-stopped
+
+networks:
+  proyecto-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local

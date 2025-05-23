@@ -21,6 +21,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/auth/**").permitAll()
                 .requestMatchers("/admin").hasRole("ADMINISTRADOR")
                 .requestMatchers("/home").authenticated()
+                .requestMatchers("/home", "/favoritos/**").authenticated() // Protegemos las rutas de favoritos
                 .anyRequest().permitAll())
             .formLogin((form) -> form
                 .loginPage("/login")

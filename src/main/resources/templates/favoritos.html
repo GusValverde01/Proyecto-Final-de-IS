@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Favoritos</title>
+</head>
+<body>
+<div class="container">
+    <h1>Mis Favoritos</h1>
+    <div th:if="${not #lists.isEmpty(libros)}">
+        <h2>Libros</h2>
+        <ul th:each="libro : ${libros}">
+            <li th:text="${libro.titulo}"></li>
+        </ul>
+    </div>
+    <div th:if="${not #lists.isEmpty(series)}">
+        <h2>Series</h2>
+        <ul th:each="serie : ${series}">
+            <li th:text="${serie.titulo}"></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

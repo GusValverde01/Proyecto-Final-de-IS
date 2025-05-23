@@ -2,6 +2,7 @@ package equipo.proyecto.auth.model;
 
 public class ResultadoBusqueda {
 
+    private Long id; // Nuevo atributo agregado
     private String titulo;
     private String autor;
     private String descripcion;
@@ -9,7 +10,8 @@ public class ResultadoBusqueda {
     private String enlace;
 
     // Constructor
-    public ResultadoBusqueda(String titulo, String autor, String descripcion, String puntuacion, String enlace) {
+    public ResultadoBusqueda(Long id, String titulo, String autor, String descripcion, String puntuacion, String enlace) {
+        this.id = id;
         this.titulo = titulo;
         this.autor = autor;
         this.descripcion = descripcion;
@@ -18,6 +20,14 @@ public class ResultadoBusqueda {
     }
 
     // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getTitulo() {
         return titulo;
     }

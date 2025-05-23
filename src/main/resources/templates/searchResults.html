@@ -12,180 +12,248 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
-
         .container {
-            width: 800px; /* Aumentado para mostrar mejor las categorías */
-            margin: 50px auto;
+            width: 100%;
+            max-width: 900px;
+            margin: 40px auto;
             padding: 30px;
             background-color: var(--bg-primary);
             border-radius: 15px;
             box-shadow: var(--shadow);
         }
-
         h1 {
             color: var(--primary-color);
             text-align: center;
         }
-        
         h2 {
             color: var(--secondary-color);
             margin-top: 25px;
             border-bottom: 2px solid var(--primary-light);
             padding-bottom: 10px;
         }
-
-        .category-section {
-            margin-bottom: 30px;
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 18px;
         }
-        
+        .result-card {
+            background: var(--bg-secondary);
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            padding: 22px 24px 18px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+        }
+        .result-card:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            transform: translateY(-3px) scale(1.01);
+        }
+        .result-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 2px;
+        }
+        .result-meta {
+            font-size: 0.98em;
+            color: var(--text-muted);
+        }
+        .result-desc {
+            margin: 8px 0 0 0;
+            color: var(--text-primary);
+            font-size: 1em;
+        }
+        .result-score {
+            font-size: 0.98em;
+            color: var(--secondary-color);
+            margin-top: 6px;
+        }
+        .result-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .add-fav-btn {
+            background: var(--secondary-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .add-fav-btn:hover:not(:disabled) {
+            background: #5f892c;
+            transform: scale(1.05);
+        }
+        .add-fav-btn:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+        .icon-heart {
+            font-size: 1.1em;
+        }
+        .result-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: text-decoration 0.2s;
+        }
+        .result-link:hover {
+            text-decoration: underline;
+        }
         .category-empty {
             font-style: italic;
             color: var(--text-muted);
             text-align: center;
             padding: 15px;
         }
-
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        li {
-            margin-bottom: 20px;
-            background-color: var(--bg-secondary);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            color: var(--text-primary);
-        }
-
-        li p {
-            margin: 5px 0;
-        }
-
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
         .back-link {
             display: block;
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: center;
             color: #fff;
             background-color: var(--secondary-color);
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.3s;
+            transition: background 0.3s;
         }
-
         .back-link:hover {
             background-color: #5f892c;
+        }
+        /* Toast */
+        #toast {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            background: #333;
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px #0008;
+            font-size: 1em;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Resultados para "<span th:text="${query}"></span>":</h1>
-        
+
         <!-- Para búsqueda por categoría específica -->
         <div th:if="${!isAllSearch}">
-            <ul>
-                <li th:each="result : ${results}">
-                    <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                    <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                    <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                    <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                    <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-                </li>
-            </ul>
+            <div class="results-grid">
+                <div class="result-card" th:each="result : ${results}">
+                    <div class="result-title" th:text="${result.titulo}"></div>
+                    <div class="result-meta">
+                        <span th:text="${result.autor}"></span>
+                    </div>
+                    <div class="result-desc" th:text="${result.descripcion}"></div>
+                    <div class="result-score">
+                        <strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span>
+                    </div>
+                    <div class="result-actions">
+                        <a class="result-link" th:href="${result.enlace}" target="_blank">Detalles</a>
+                        <button type="button"
+                            class="add-fav-btn"
+                            aria-label="Añadir a Favoritos"
+                            th:attr="data-tipo=${type},data-id=${result.enlace},data-titulo=${result.titulo}">
+                            <span class="icon-heart">❤️</span> Añadir a Favoritos
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
         <!-- Para búsqueda en todas las categorías -->
         <div th:if="${isAllSearch}">
-            <!-- Sección de Libros -->
-            <div class="category-section">
-                <h2>Libros</h2>
-                <ul th:if="${!categorizedResults.libros.empty}">
-                    <li th:each="result : ${categorizedResults.libros}">
-                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-                    </li>
-                </ul>
-                <div class="category-empty" th:if="${categorizedResults.libros.empty}">
-                    No se encontraron resultados en libros para esta búsqueda.
+            <div class="category-section" th:each="entry : ${categorizedResults}">
+                <h2 th:text="${entry.key}"></h2>
+                <div class="results-grid">
+                    <div class="result-card" th:each="result : ${entry.value}">
+                        <div class="result-title" th:text="${result.titulo}"></div>
+                        <div class="result-meta">
+                            <span th:text="${result.autor}"></span>
+                        </div>
+                        <div class="result-desc" th:text="${result.descripcion}"></div>
+                        <div class="result-score">
+                            <strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span>
+                        </div>
+                        <div class="result-actions">
+                            <a class="result-link" th:href="${result.enlace}" target="_blank">Detalles</a>
+                            <button type="button"
+                                class="add-fav-btn"
+                                aria-label="Añadir a Favoritos"
+                                th:attr="data-tipo=${type},data-id=${result.enlace},data-titulo=${result.titulo}">
+                                <span class="icon-heart">❤️</span> Añadir a Favoritos
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            
-            <!-- Sección de Series -->
-            <div class="category-section">
-                <h2>Series</h2>
-                <ul th:if="${!categorizedResults.series.empty}">
-                    <li th:each="result : ${categorizedResults.series}">
-                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-                    </li>
-                </ul>
-                <div class="category-empty" th:if="${categorizedResults.series.empty}">
-                    No se encontraron resultados en series para esta búsqueda.
-                </div>
-            </div>
-            
-            <!-- Sección de Videojuegos -->
-            <div class="category-section">
-                <h2>Videojuegos</h2>
-                <ul th:if="${!categorizedResults.videojuegos.empty}">
-                    <li th:each="result : ${categorizedResults.videojuegos}">
-                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-                    </li>
-                </ul>
-                <div class="category-empty" th:if="${categorizedResults.videojuegos.empty}">
-                    No se encontraron resultados en videojuegos para esta búsqueda.
-                </div>
-            </div>
-            
-            <!-- Sección de Anime -->
-            <div class="category-section">
-                <h2>Anime</h2>
-                <ul th:if="${!categorizedResults.anime.empty}">
-                    <li th:each="result : ${categorizedResults.anime}">
-                        <p><strong>Título:</strong> <span th:text="${result.titulo}"></span></p>
-                        <p><strong>Autor/Creador:</strong> <span th:text="${result.autor}"></span></p>
-                        <p><strong>Sinopsis:</strong> <span th:text="${result.descripcion}"></span></p>
-                        <p><strong>Puntuación:</strong> <span th:text="${result.puntuacion}"></span></p>
-                        <p><a th:href="${result.enlace}" target="_blank">Detalles</a></p>
-                    </li>
-                </ul>
-                <div class="category-empty" th:if="${categorizedResults.anime.empty}">
-                    No se encontraron resultados en anime para esta búsqueda.
+                <div class="category-empty" th:if="${#lists.isEmpty(entry.value)}">
+                    No se encontraron resultados en esta categoría para esta búsqueda.
                 </div>
             </div>
         </div>
-        
+
         <a class="back-link" th:href="@{/search}">Nueva búsqueda</a>
     </div>
 
-    <!-- Theme Switcher -->
+    <div id="toast"></div>
+
+    <script>
+    function showToast(msg) {
+        const toast = document.getElementById('toast');
+        toast.textContent = msg;
+        toast.style.display = 'block';
+        setTimeout(() => toast.style.display = 'none', 2200);
+    }
+    function addToFavorites(tipo, contenidoId, titulo, btn) {
+        fetch('/favoritos/agregar', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `tipo=${encodeURIComponent(tipo)}&contenidoId=${encodeURIComponent(contenidoId)}&titulo=${encodeURIComponent(titulo)}`
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                btn.textContent = "¡Añadido!";
+                btn.disabled = true;
+                btn.classList.add("added");
+                showToast('Añadido a favoritos correctamente');
+            } else {
+                showToast(data.mensaje || 'Error al añadir a favoritos');
+            }
+        })
+        .catch(() => showToast('Error de red al añadir a favoritos'));
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('.add-fav-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tipo = this.getAttribute('data-tipo');
+                const contenidoId = this.getAttribute('data-id');
+                const titulo = this.getAttribute('data-titulo');
+                addToFavorites(tipo, contenidoId, titulo, this);
+            });
+        });
+    });
+    </script>
 <div class="theme-switcher">
     <button id="theme-toggle" aria-label="Cambiar tema">
         <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-  Optional<Usuario> findByNombre(String nombre);  // EL campo es "nombre"
+    Optional<Usuario> findByNombre(String nombre); // Método existente para buscar usuarios por nombre
 }
