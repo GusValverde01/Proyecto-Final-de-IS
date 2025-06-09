@@ -3,114 +3,222 @@
 <head>
     <title>Búsqueda de Contenido</title>
     <link rel="stylesheet" href="/css/theme.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
-    body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    .container-search {
+        width: 95vw;
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 32px 24px;
+        background-color: var(--bg-primary);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+    h1 {
+        color: var(--primary-color);
+        text-align: center;
+        font-size: 2.2rem;
+        margin-bottom: 10px;
+        letter-spacing: 1px;
+    }
+    .main-flex {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+        width: 100%;
+    }
+    .form-section {
+        flex: 1.2;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+        justify-content: flex-start;
+    }
+    label {
+        font-size: 1rem;
+        color: var(--primary-dark);
+        margin-bottom: 4px;
+        font-weight: 500;
+    }
+    input, select, button {
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        margin-bottom: 8px;
+        background: var(--input-bg);
+        color: var(--text-primary);
+        transition: border 0.2s, background 0.2s;
+    }
+    input:focus, select:focus {
+        outline: none;
+        border: 1.5px solid var(--primary-color);
+        background: #fff;
+    }
+    button {
+        background-color: var(--secondary-color);
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        cursor: pointer;
+        transition: background 0.3s, box-shadow 0.2s;
+        margin-top: 10px;
+        box-shadow: 0 2px 8px var(--shadow-color);
+    }
+    button:hover {
+        background-color: var(--secondary-dark);
+        box-shadow: 0 4px 16px var(--shadow-color);
+    }
+    .recomendaciones-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-width: 220px;
+        max-width: 320px;
+    }
+    .recomendaciones-section h3 {
+        margin: 0 0 10px 0;
+        color: var(--primary-dark);
+        font-size: 1.1rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+    }
+    #recomendaciones-carrusel {
+        display: flex;
+        overflow-x: auto;
+        gap: 16px;
+        width: 100%;
+        padding-bottom: 6px;
+    }
+    #recomendaciones-carrusel::-webkit-scrollbar {
+        height: 8px;
+        background: #e0e0e0;
+        border-radius: 4px;
+    }
+    #recomendaciones-carrusel::-webkit-scrollbar-thumb {
+        background: #bdbdbd;
+        border-radius: 4px;
+    }
+    #recomendaciones-carrusel > div {
+        min-width: 120px;
+        max-width: 140px;
+        cursor: pointer;
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        padding: 10px 8px 8px 8px;
+        box-shadow: 0 2px 8px var(--shadow-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: box-shadow 0.2s, transform 0.2s, background 0.2s, border 0.2s;
+        border: 1.5px solid transparent;
+    }
+    #recomendaciones-carrusel > div:hover {
+        box-shadow: 0 4px 16px var(--shadow-color);
+        border: 1.5px solid var(--primary-color);
+        transform: translateY(-3px) scale(1.04);
+        background: #e8f5e9;
+    }
+    #recomendaciones-carrusel img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-bottom: 7px;
+        background: #e0e0e0;
+    }
+    .rec-label {
+        text-align: center;
+        font-size: 0.98em;
+        color: var(--text-primary);
+        font-weight: 500;
+        margin-top: 2px;
+        word-break: break-word;
+    }
+    @media (max-width: 900px) {
+        .container-search {
+            max-width: 99vw;
+            padding: 18px 2vw;
         }
-
-        .container {
-            width: 400px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: var(--bg-primary);
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        h1 {
-            color: var(--primary-color);
-            text-align: center;
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
-
-        form {
-            display: flex;
+        .main-flex {
             flex-direction: column;
-            gap: 15px;
-            color: var(--text-primary);
+            gap: 24px;
         }
-
-        label {
-            font-size: 1rem;
-            color: var(--primary-dark);
+        .recomendaciones-section {
+            max-width: 100vw;
+            min-width: 0;
         }
-
-        input, select, button {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 8px;
-            border: 1px solid var(--primary-dark);
-        }
-
-        button {
-            background-color: var(--secondary-color);
-            color: #fff;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        button:hover {
-            background-color: #5f892c;
-        }
+    }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="theme-switcher-global">
+        <button id="theme-toggle" aria-label="Cambiar tema">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+            <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"></svg>
+        </button>
+        <div class="theme-dropdown">
+            <div class="theme-option" data-theme="light">
+                <span class="theme-icon">☀️</span>
+                <span>Claro</span>
+            </div>
+            <div class="theme-option" data-theme="dark">
+                <span class="theme-icon">🌙</span>
+                <span>Oscuro</span>
+            </div>
+            <div class="theme-option" data-theme="system">
+                <span class="theme-icon">💻</span>
+                <span>Sistema</span>
+            </div>
+        </div>
+    </div>
+    <div class="container-search">
         <h1>Buscar Contenido</h1>
-        <form th:action="@{/search/results}" method="get">
-            <label for="query">Palabra clave:</label>
-            <input type="text" id="query" name="query" placeholder="Escribe algo..." required />
-            
-            <label for="type">Tipo:</label>
-            <select id="type" name="type" required>
-                <option value="libro">Libros</option>
-                <option value="serie">Series</option>
-                <option value="videojuego">Videojuegos</option>
-                <option value="anime">Anime</option>
-                <option value="all">Todos</option> <!-- New option -->
-            </select>
-            
-            <button type="submit">Buscar</button>
+        <form th:action="@{/search/results}" method="get" autocomplete="off">
+            <div class="main-flex">
+                <div class="form-section">
+                    <label for="query">Palabra clave:</label>
+                    <input type="text" id="query" name="query" placeholder="Escribe algo..." required />
+
+                    <label for="type">Tipo:</label>
+                    <select id="type" name="type" required>
+                        <option value="libro">Libros</option>
+                        <option value="serie">Series</option>
+                        <option value="videojuego">Videojuegos</option>
+                        <option value="anime">Anime</option>
+                        <option value="all">Todos</option>
+                    </select>
+                    <button type="submit">Buscar</button>
+                </div>
+                <div class="recomendaciones-section">
+                    <h3>Recomendaciones</h3>
+                    <div id="recomendaciones-carrusel">
+                        <div th:each="rec : ${recomendaciones}" 
+                             th:attr="data-busqueda=${rec.busqueda}">
+                            <img th:src="${rec.img}" th:alt="${rec.busqueda}" />
+                            <div class="rec-label" th:text="${rec.busqueda}"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
-    <!-- Theme Switcher -->
-<div class="theme-switcher">
-    <button id="theme-toggle" aria-label="Cambiar tema">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
-        </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/>
-        </svg>
-        <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/>
-        </svg>
-    </button>
-    <div class="theme-dropdown">
-        <div class="theme-option" data-theme="light">
-            <span class="theme-icon">☀️</span>
-            <span>Claro</span>
-        </div>
-        <div class="theme-option" data-theme="dark">
-            <span class="theme-icon">🌙</span>
-            <span>Oscuro</span>
-        </div>
-        <div class="theme-option" data-theme="system">
-            <span class="theme-icon">💻</span>
-            <span>Sistema</span>
-        </div>
-    </div>
-</div>
     <script src="/js/theme-switcher.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('#recomendaciones-carrusel > div').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var busqueda = this.getAttribute('data-busqueda');
+                document.getElementById('query').value = busqueda;
+                this.closest('form').submit();
+            });
+        });
+    });
+    </script>
 </body>
 </html>

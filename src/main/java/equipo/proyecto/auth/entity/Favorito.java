@@ -41,6 +41,12 @@ public class Favorito {
         return usuarioId;
     }
 
+    public Long getId() {
+       return id;
+  }
+
+// ...existing code...
+
     public String getTipo() {
         return tipo;
     }

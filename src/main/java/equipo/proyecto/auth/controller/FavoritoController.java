@@ -60,4 +60,19 @@ public class FavoritoController {
         response.put("mensaje", "Debe iniciar sesión para agregar favoritos");
         return ResponseEntity.badRequest().body(response);
     }
+
+    @PostMapping("/eliminar")
+@ResponseBody
+public ResponseEntity<?> eliminarFavorito(@RequestParam Long id, Authentication authentication) {
+    Map<String, Object> response = new HashMap<>();
+    if (authentication != null && authentication.isAuthenticated()) {
+        boolean eliminado = favoritoService.eliminarFavoritoPorId(id);
+        response.put("success", eliminado);
+        response.put("mensaje", eliminado ? "Eliminado correctamente" : "No se pudo eliminar");
+        return ResponseEntity.ok(response);
+    }
+    response.put("success", false);
+    response.put("mensaje", "Debe iniciar sesión para eliminar favoritos");
+    return ResponseEntity.badRequest().body(response);
+}
 }

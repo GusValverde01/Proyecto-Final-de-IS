@@ -5,6 +5,136 @@
     <title>Mis Favoritos</title>
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .favoritos-section {
+            margin-top: 32px;
+        }
+        .favoritos-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0;
+            list-style: none;
+        }
+        .favorito-card {
+            background: var(--container-bg, #fafafa);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            padding: 18px 22px;
+            min-width: 200px;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .favorito-card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            transform: translateY(-2px) scale(1.01);
+        }
+        .favorito-icon {
+            font-size: 1.7rem;
+            opacity: 0.85;
+        }
+        .favorito-title {
+            font-weight: 500;
+            font-size: 1.05rem;
+            flex: 1;
+        }
+        .btn-eliminar {
+            background: var(--primary, #512da8);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 5px 14px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-eliminar:hover {
+            background: var(--primary-dark, #311b92);
+        }
+        .favoritos-section h2 {
+            margin-top: 28px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        /* Botón "Volver al inicio" */
+        .button-search {
+            background: var(--primary, #512da8);
+            color: #fff !important;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 28px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 32px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+        .button-search:hover {
+            background: var(--primary-dark, #311b92);
+            transform: translateY(-2px) scale(1.03);
+            color: #fff;
+        }
+        /* Footer mejorado */
+        footer {
+            background: var(--container-bg, #fafafa);
+            border-top: 1px solid #e0e0e0;
+            margin-top: 40px;
+            padding: 28px 0 10px 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .footer-logos {
+            margin-bottom: 10px;
+        }
+        .footer-logos img {
+            height: 38px;
+            margin: 0 10px;
+            vertical-align: middle;
+            filter: grayscale(0.2);
+            transition: filter 0.2s;
+        }
+        .footer-logos img:hover {
+            filter: grayscale(0) drop-shadow(0 2px 6px rgba(81,45,168,0.08));
+        }
+        .footer-links {
+            margin-bottom: 8px;
+            color: var(--primary, #512da8);
+        }
+        .footer-links a {
+            color: var(--primary, #512da8);
+            text-decoration: none;
+            margin: 0 4px;
+            transition: text-decoration 0.2s;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .footer-copy {
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 6px;
+        }
+        @media (max-width: 600px) {
+            .favoritos-list {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .footer-logos img {
+                height: 28px;
+                margin: 0 4px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="theme-switcher-global">
@@ -36,20 +166,28 @@
     </div>
     <div class="main-layout" style="justify-content: center; align-items: flex-start;">
         <div class="home-container container">
-            <h1>Mis Favoritos</h1>
-            <div th:if="${not #lists.isEmpty(libros)}">
-                <h2>Libros</h2>
-                <ul th:each="libro : ${libros}">
-                    <li th:text="${libro.titulo}"></li>
+            <h1 style="text-align:center; margin-bottom:18px;">Mis Favoritos</h1>
+            <div th:if="${not #lists.isEmpty(libros)}" class="favoritos-section">
+                <h2><span class="favorito-icon">📚</span> Libros</h2>
+                <ul class="favoritos-list" th:each="libro : ${libros}">
+                    <li class="favorito-card">
+                        <span class="favorito-icon">📖</span>
+                        <span class="favorito-title" th:text="${libro.titulo}"></span>
+                        <button th:attr="onclick='eliminarFavorito(' + ${libro.id} + ')'" class="btn-eliminar" title="Eliminar de favoritos">Eliminar</button>
+                    </li>
                 </ul>
             </div>
-            <div th:if="${not #lists.isEmpty(series)}">
-                <h2>Series</h2>
-                <ul th:each="serie : ${series}">
-                    <li th:text="${serie.titulo}"></li>
+            <div th:if="${not #lists.isEmpty(series)}" class="favoritos-section">
+                <h2><span class="favorito-icon">🎬</span> Series</h2>
+                <ul class="favoritos-list" th:each="serie : ${series}">
+                    <li class="favorito-card">
+                        <span class="favorito-icon">📺</span>
+                        <span class="favorito-title" th:text="${serie.titulo}"></span>
+                        <button th:attr="onclick='eliminarFavorito(' + ${serie.id} + ')'" class="btn-eliminar" title="Eliminar de favoritos">Eliminar</button>
+                    </li>
                 </ul>
             </div>
-            <a href="/home" class="button-search" style="margin-top:24px;display:inline-block;">Volver al inicio</a>
+            <a href="/home" class="button-search">Volver al inicio</a>
         </div>
     </div>
     <footer>
@@ -68,5 +206,24 @@
         </div>
     </footer>
     <script src="/js/theme-switcher.js"></script>
+    <script>
+    function eliminarFavorito(id) {
+        if (confirm('¿Seguro que quieres eliminar este favorito?')) {
+            fetch('/favoritos/eliminar', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'id=' + id
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert(data.mensaje);
+                }
+            });
+        }
+    }
+    </script>
 </body>
 </html>
