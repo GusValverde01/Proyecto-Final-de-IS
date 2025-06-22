@@ -1012,3 +1012,11 @@ footer {
         padding: 14px 10px;
     }
 }
+
+/* Ajuste específico para la sección de información en registro */
+.info-section.register-info {
+    justify-content: flex-start;
+    align-items: center;
+    padding-top: 60px;
+}
+

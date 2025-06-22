@@ -6,6 +6,7 @@
     <title>Home - Usuario</title>
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
     <div class="theme-switcher-global">
@@ -26,33 +27,160 @@
             <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
     </div>
-<div class="main-layout">
-    <div class="home-panel">
-        <div class="home-header">
-            <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM IPN" class="escudo">
+
+    <div class="main-layout">
+        <div class="info-section home-info">
+            <div class="welcome-banner">
+                <div class="banner-content">
+                    <h1>¡Bienvenido de vuelta!</h1>
+                    <p>Explora el mundo del entretenimiento con nuestro sistema de búsqueda inteligente</p>
+                </div>
+                <div class="banner-animation">
+                    <div class="floating-elements">
+                        <div class="float-element" data-type="anime">🎌</div>
+                        <div class="float-element" data-type="games">🎮</div>
+                        <div class="float-element" data-type="books">📚</div>
+                        <div class="float-element" data-type="series">📺</div>
+                        <div class="float-element" data-type="movies">🎬</div>
+                        <div class="float-element" data-type="music">🎵</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">🔍</div>
+                    <div class="stat-info">
+                        <h3 id="totalSearches">12</h3>
+                        <p>Búsquedas realizadas</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-info">
+                        <h3 id="totalFavorites">8</h3>
+                        <p>Favoritos guardados</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-info">
+                        <h3 id="categoriesExplored">4</h3>
+                        <p>Categorías exploradas</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="home-content">
-            <h1>Bienvenido, <span th:text="${nombre}">Usuario</span></h1>
-            <div class="message">
-                Esta es tu página principal. Aquí puedes consultar tu información personal.
+        
+        <div class="home-panel">
+            <div class="home-header">
+                <div class="user-avatar">
+                    <div class="avatar-circle">
+                        <span class="avatar-initial" th:text="${nombre != null ? nombre.substring(0,1).toUpperCase() : 'U'}">U</span>
+                    </div>
+                    <div class="user-info">
+                        <h2>Hola, <span th:text="${nombre}">Usuario</span></h2>
+                        <p class="user-role" th:text="${rol}">Estudiante</p>
+                    </div>
+                </div>
+                <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM IPN" class="escudo">
             </div>
-            <div class="profile-section">
-                <h2>Información del Perfil</h2>
-                <ul>
-                    <li><strong>Nombre:</strong> <span th:text="${nombre}"></span></li>
-                    <li><strong>Email:</strong> <span th:text="${email}"></span></li>
-                    <li><strong>Rol:</strong> <span th:text="${rol}"></span></li>
-                </ul>
+            
+            <div class="home-content">
+                <div class="greeting-time">
+                    <span id="timeGreeting">Buenos días</span>
+                    <div class="current-time">
+                        <span id="currentTime"></span>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+                
+                <div class="profile-card">
+                    <h3>Tu Perfil</h3>
+                    <div class="profile-details">
+                        <div class="detail-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                            <span th:text="${nombre}">Usuario</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <span th:text="${email}">email@ejemplo.com</span>
+                        </div>
+                        <div class="detail-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1L9 7V9C9 10.1 9.9 11 11 11V16L12 17L13 16V11C14.1 11 15 10.1 15 9Z"/>
+                            </svg>
+                            <span th:text="${rol}">Estudiante</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-cards">
+                    <a href="/search" class="action-card primary">
+                        <div class="card-icon">🔍</div>
+                        <h3>Búsqueda Inteligente</h3>
+                        <p>Encuentra contenido multimedia</p>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    
+                    <a href="/search/history" class="action-card secondary">
+                        <div class="card-icon">📋</div>
+                        <h3>Historial</h3>
+                        <p>Revisa tus búsquedas anteriores</p>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    
+                    <a href="/favoritos" class="action-card accent">
+                        <div class="card-icon">⭐</div>
+                        <h3>Favoritos</h3>
+                        <p>Tus contenidos guardados</p>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
+                
+                <div class="recent-activity">
+                    <h3>Actividad Reciente</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">🔍</div>
+                            <div class="activity-content">
+                                <p>Búsqueda de anime romántico</p>
+                                <span>Hace 2 horas</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">⭐</div>
+                            <div class="activity-content">
+                                <p>Agregaste "Your Name" a favoritos</p>
+                                <span>Hace 1 día</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">📚</div>
+                            <div class="activity-content">
+                                <p>Exploración de libros de ciencia ficción</p>
+                                <span>Hace 3 días</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="logout-section">
+                    <a href="/logout" class="logout-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.59L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                        </svg>
+                        Cerrar Sesión
+                    </a>
+                </div>
             </div>
-            <div class="button-group">
-                <a href="/search" class="button-search">Ir a Búsqueda</a>
-                <a href="/search/history" class="button-history">Ver Historial de Búsquedas</a>
-                <a href="/favoritos" class="button-favorite">Mis Favoritos</a>
-            </div>
-            <a href="/logout" class="logout-link">Cerrar sesión</a>
         </div>
     </div>
-</div>
+
     <footer>
         <div class="footer-logos">
             <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
@@ -68,6 +196,8 @@
             &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software. Todos los derechos reservados.
         </div>
     </footer>
+    
+    <script src="/js/home.js"></script>
     <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

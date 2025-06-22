@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Búsqueda de Contenido</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Contenido - ESCOM</title>
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/search.css">
 </head>
 <body>
     <div class="theme-switcher-global">
         <button id="theme-toggle" aria-label="Cambiar tema">
-            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></svg>
-            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></svg>
-            <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/></svg>
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
+            </svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/>
+            </svg>
+            <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/>
+            </svg>
         </button>
         <div class="theme-dropdown">
             <div class="theme-option" data-theme="light"><span class="theme-icon">☀️</span><span>Claro</span></div>
@@ -18,43 +27,208 @@
             <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
     </div>
+
     <div class="main-layout">
         <div class="search-panel">
-            <div class="search-header">
-                <h1>Buscar Contenido</h1>
-            </div>
-            <div class="search-content">
-                <form th:action="@{/search/results}" method="get" autocomplete="off">
-                    <div class="main-flex">
-                        <div class="form-section">
-                            <label for="query">Palabra clave:</label>
-                            <input type="text" id="query" name="query" placeholder="Escribe algo..." required />
-
-                            <label for="type">Tipo:</label>
-                            <select id="type" name="type" required>
-                                <option value="libro">Libros</option>
-                                <option value="serie">Series</option>
-                                <option value="videojuego">Videojuegos</option>
-                                <option value="anime">Anime</option>
-                                <option value="all">Todos</option>
-                            </select>
-                            <button type="submit" class="btn-login">Buscar</button>
+            <div class="search-panel-inner">
+                <!-- Header con navegación -->
+                <div class="search-header">
+                    <div class="header-content">
+                        <div class="title-section">
+                            <h1>
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Explorar Contenido
+                            </h1>
+                            <p>Descubre libros, series, videojuegos y anime</p>
                         </div>
-                        <div class="recomendaciones-section">
-                            <h3>Recomendaciones</h3>
-                            <div id="recomendaciones-carrusel">
-                                <div th:each="rec : ${recomendaciones}" 
-                                     th:attr="data-busqueda=${rec.busqueda}">
-                                    <img th:src="${rec.img}" th:alt="${rec.busqueda}" />
-                                    <div class="rec-label" th:text="${rec.busqueda}"></div>
+                        
+                        <div class="navigation-actions">
+                            <a href="/home" class="btn-nav secondary">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Inicio
+                            </a>
+                            <a href="/historial" class="btn-nav secondary">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Historial
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido principal -->
+                <div class="search-content">
+                    <div class="content-wrapper">
+                        <!-- Formulario de búsqueda -->
+                        <div class="search-form-section">
+                            <form th:action="@{/search/results}" method="get" autocomplete="off" id="searchForm">
+                                <div class="form-container">
+                                    <div class="search-input-group">
+                                        <label for="query">¿Qué quieres buscar?</label>
+                                        <div class="input-wrapper">
+                                            <input type="text" 
+                                                   id="query" 
+                                                   name="query" 
+                                                   placeholder="Escribe el título, autor o palabra clave..." 
+                                                   required 
+                                                   autocomplete="off" />
+                                            <div class="input-suggestions" id="suggestions"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="type-selection">
+                                        <label>Tipo de contenido:</label>
+                                        <div class="type-grid">
+                                            <div class="type-option" data-type="libro">
+                                                <input type="radio" id="type-libro" name="type" value="libro" checked>
+                                                <label for="type-libro">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20M4 19.5C4 20.163 4.26339 20.7989 4.73223 21.2678C5.20107 21.7366 5.83696 22 6.5 22H20V17M4 19.5V4.5C4 3.83696 4.26339 3.20107 4.73223 2.73223C5.20107 2.26339 5.83696 2 6.5 2H20V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span>Libros</span>
+                                                </label>
+                                            </div>
+                                            <div class="type-option" data-type="serie">
+                                                <input type="radio" id="type-serie" name="type" value="serie">
+                                                <label for="type-serie">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M7 2V22M17 2V22M2 12H22M2 7H7M7 17H22M17 7H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span>Series</span>
+                                                </label>
+                                            </div>
+                                            <div class="type-option" data-type="videojuego">
+                                                <input type="radio" id="type-videojuego" name="type" value="videojuego">
+                                                <label for="type-videojuego">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M6 14H14M9 11V17M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span>Videojuegos</span>
+                                                </label>
+                                            </div>
+                                            <div class="type-option" data-type="anime">
+                                                <input type="radio" id="type-anime" name="type" value="anime">
+                                                <label for="type-anime">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M14.828 14.828C15.8389 13.8171 16.4142 12.4427 16.4142 11C16.4142 9.55734 15.8389 8.18294 14.828 7.17204C13.8171 6.16114 12.4427 5.58579 11 5.58579C9.55734 5.58579 8.18294 6.16114 7.17204 7.17204C6.16114 8.18294 5.58579 9.55734 5.58579 11C5.58579 12.4427 6.16114 13.8171 7.17204 14.828L11 18.6569L14.828 14.828Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span>Anime</span>
+                                                </label>
+                                            </div>
+                                            <div class="type-option" data-type="all">
+                                                <input type="radio" id="type-all" name="type" value="all">
+                                                <label for="type-all">
+                                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M3 7V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        <path d="M8 11L10 13L16 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                    <span>Todo</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="search-actions">
+                                        <button type="submit" class="btn-search primary" id="searchBtn">
+                                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            <span class="btn-text">Buscar</span>
+                                            <div class="btn-loader" style="display: none;">
+                                                <div class="spinner"></div>
+                                            </div>
+                                        </button>
+                                        <button type="button" class="btn-clear secondary" id="clearBtn">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M3 6H5H21M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            Limpiar
+                                        </button>
+                                    </div>
                                 </div>
+                            </form>
+                        </div>
+
+                        <!-- Sección de recomendaciones -->
+                        <div class="recommendations-section" th:if="${recomendaciones != null and not #lists.isEmpty(recomendaciones)}">
+                            <div class="section-header">
+                                <h3>
+                                    <svg class="section-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.663 17H4.5C2.015 17 0 14.985 0 12.5S2.015 8 4.5 8H9.663M14.337 17H19.5C21.985 17 24 14.985 24 12.5S21.985 8 19.5 8H14.337M6 12.5H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Recomendaciones para ti
+                                </h3>
+                                <p>Explora contenido popular y trending</p>
+                            </div>
+                            
+                            <div class="recommendations-carousel">
+                                <button class="carousel-btn prev" id="prevBtn" aria-label="Anterior">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                
+                                <div class="carousel-container" id="carouselContainer">
+                                    <div class="carousel-track" id="carouselTrack">
+                                        <div th:each="rec, iterStat : ${recomendaciones}" 
+                                             class="recommendation-card"
+                                             th:attr="data-busqueda=${rec.busqueda}, data-index=${iterStat.index}">
+                                            <div class="card-image">
+                                                <img th:src="${rec.img}" 
+                                                     th:alt="${rec.busqueda}" 
+                                                     loading="lazy" />
+                                                <div class="card-overlay">
+                                                    <button class="quick-search-btn" th:attr="data-query=${rec.busqueda}">
+                                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                        </svg>
+                                                        Buscar
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="card-content">
+                                                <h4 th:text="${rec.busqueda}"></h4>
+                                                <span class="card-category">Recomendado</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="carousel-btn next" id="nextBtn" aria-label="Siguiente">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                            
+                            <div class="carousel-indicators" id="carouselIndicators"></div>
+                        </div>
+
+                        <!-- Búsquedas rápidas -->
+                        <div class="quick-searches">
+                            <h3>Búsquedas populares</h3>
+                            <div class="quick-search-tags">
+                                <button class="tag-btn" data-query="harry potter" data-type="libro">Harry Potter</button>
+                                <button class="tag-btn" data-query="game of thrones" data-type="serie">Game of Thrones</button>
+                                <button class="tag-btn" data-query="minecraft" data-type="videojuego">Minecraft</button>
+                                <button class="tag-btn" data-query="naruto" data-type="anime">Naruto</button>
+                                <button class="tag-btn" data-query="stephen king" data-type="libro">Stephen King</button>
+                                <button class="tag-btn" data-query="breaking bad" data-type="serie">Breaking Bad</button>
+                                <button class="tag-btn" data-query="zelda" data-type="videojuego">Zelda</button>
+                                <button class="tag-btn" data-query="one piece" data-type="anime">One Piece</button>
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
     <footer>
         <div class="footer-logos">
             <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
@@ -70,17 +244,8 @@
             &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software. Todos los derechos reservados.
         </div>
     </footer>
+
+    <script src="/js/search.js"></script>
     <script src="/js/theme-switcher.js"></script>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelectorAll('#recomendaciones-carrusel > div').forEach(function(card) {
-            card.addEventListener('click', function() {
-                var busqueda = this.getAttribute('data-busqueda');
-                document.getElementById('query').value = busqueda;
-                this.closest('form').submit();
-            });
-        });
-    });
-    </script>
 </body>
 </html>

@@ -2,9 +2,11 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Mis Favoritos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Favoritos - ESCOM</title>
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/favoritos.css">
 </head>
 <body>
     <div class="theme-switcher-global">
@@ -25,36 +27,196 @@
             <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
     </div>
+
     <div class="main-layout">
         <div class="favoritos-panel">
-            <div class="favoritos-header">
-                <h1>Mis Favoritos</h1>
-            </div>
-            <div class="favoritos-content">
-                <div th:if="${not #lists.isEmpty(libros)}" class="favoritos-section">
-                    <h2><span class="favorito-icon">📚</span> Libros</h2>
-                    <ul class="favoritos-list" th:each="libro : ${libros}">
-                        <li class="favorito-card">
-                            <span class="favorito-icon">📖</span>
-                            <span class="favorito-title" th:text="${libro.titulo}"></span>
-                            <button th:attr="onclick='eliminarFavorito(' + ${libro.id} + ')'" class="btn-eliminar" title="Eliminar de favoritos">Eliminar</button>
-                        </li>
-                    </ul>
+            <div class="favoritos-panel-inner">
+                <!-- Header con estadísticas -->
+                <div class="favoritos-header">
+                    <div class="header-content">
+                        <div class="title-section">
+                            <h1>
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.61C2.1283 5.6417 1.5487 7.04097 1.5487 8.5C1.5487 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39467C21.7563 5.72723 21.351 5.1208 20.84 4.61V4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Mis Favoritos
+                            </h1>
+                            <p>Tu colección personal de contenido guardado</p>
+                        </div>
+                        
+                        <div class="favoritos-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalFavoritos">0</span>
+                                <span class="stat-label">Total de favoritos</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="categorias">0</span>
+                                <span class="stat-label">Categorías</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div th:if="${not #lists.isEmpty(series)}" class="favoritos-section">
-                    <h2><span class="favorito-icon">🎬</span> Series</h2>
-                    <ul class="favoritos-list" th:each="serie : ${series}">
-                        <li class="favorito-card">
-                            <span class="favorito-icon">📺</span>
-                            <span class="favorito-title" th:text="${serie.titulo}"></span>
-                            <button th:attr="onclick='eliminarFavorito(' + ${serie.id} + ')'" class="btn-eliminar" title="Eliminar de favoritos">Eliminar</button>
-                        </li>
-                    </ul>
+
+                <!-- Acciones y filtros -->
+                <div class="favoritos-actions">
+                    <div class="action-buttons">
+                        <a href="/home" class="btn-action secondary">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Inicio
+                        </a>
+                        <a href="/search" class="btn-action primary">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Buscar más contenido
+                        </a>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="search-filter">
+                            <input type="text" id="searchFilter" placeholder="Buscar en favoritos...">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        
+                        <select id="categoryFilter">
+                            <option value="all">Todas las categorías</option>
+                            <option value="libros">📚 Libros</option>
+                            <option value="series">🎬 Series</option>
+                            <option value="anime">🍥 Anime</option>
+                            <option value="juegos">🎮 Videojuegos</option>
+                        </select>
+                        
+                        <button id="clearAllFavorites" class="btn-clear" title="Limpiar todos los favoritos">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6H5H21M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19ZM10 11V17M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <a href="/home" class="button-search">Volver al inicio</a>
+
+                <!-- Contenido de favoritos -->
+                <div class="favoritos-content">
+                    <!-- Estado vacío -->
+                    <div th:if="${#lists.isEmpty(libros) and #lists.isEmpty(series)}" class="empty-state">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.61C2.1283 5.6417 1.5487 7.04097 1.5487 8.5C1.5487 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39467C21.7563 5.72723 21.351 5.1208 20.84 4.61V4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>No tienes favoritos guardados</h3>
+                        <p>Comienza explorando contenido y guarda tus elementos favoritos</p>
+                        <a href="/search" class="btn-action primary">Explorar contenido</a>
+                    </div>
+
+                    <!-- Sección de Libros -->
+                    <div th:if="${not #lists.isEmpty(libros)}" class="favoritos-section" data-category="libros">
+                        <div class="section-header">
+                            <h2>
+                                <span class="category-icon">📚</span>
+                                Libros
+                                <span class="category-count" th:text="'(' + ${#lists.size(libros)} + ')'"></span>
+                            </h2>
+                            <button class="section-toggle" data-target="libros-grid">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="favoritos-grid" id="libros-grid">
+                            <div th:each="libro : ${libros}" class="favorito-card" th:data-title="${libro.titulo}">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 19.5C4 18.837 4.26339 18.2011 4.73223 17.7322C5.20107 17.2634 5.83696 17 6.5 17H20M4 19.5C4 20.163 4.26339 20.7989 4.73223 21.2678C5.20107 21.7366 5.83696 22 6.5 22H20V2H6.5C5.83696 2 5.20107 2.26339 4.73223 2.73223C4.26339 3.20107 4 3.83696 4 4.5V19.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title" th:text="${libro.titulo}"></h3>
+                                    <p class="card-category">Libro</p>
+                                    <div class="card-meta">
+                                        <span class="meta-item">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            Agregado recientemente
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn view-btn" title="Ver detalles">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 12S5 4 12 4S23 12 23 12S19 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-btn remove-btn" th:attr="onclick='eliminarFavorito(' + ${libro.id} + ', this)'" title="Eliminar de favoritos">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.61C2.1283 5.6417 1.5487 7.04097 1.5487 8.5C1.5487 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39467C21.7563 5.72723 21.351 5.1208 20.84 4.61V4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Series -->
+                    <div th:if="${not #lists.isEmpty(series)}" class="favoritos-section" data-category="series">
+                        <div class="section-header">
+                            <h2>
+                                <span class="category-icon">🎬</span>
+                                Series
+                                <span class="category-count" th:text="'(' + ${#lists.size(series)} + ')'"></span>
+                            </h2>
+                            <button class="section-toggle" data-target="series-grid">
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="favoritos-grid" id="series-grid">
+                            <div th:each="serie : ${series}" class="favorito-card" th:data-title="${serie.titulo}">
+                                <div class="card-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M23 7L16 12L23 17V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title" th:text="${serie.titulo}"></h3>
+                                    <p class="card-category">Serie</p>
+                                    <div class="card-meta">
+                                        <span class="meta-item">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            Agregado recientemente
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <button class="action-btn view-btn" title="Ver detalles">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M1 12S5 4 12 4S23 12 23 12S19 20 12 20S1 12 1 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                        </svg>
+                                    </button>
+                                    <button class="action-btn remove-btn" th:attr="onclick='eliminarFavorito(' + ${serie.id} + ', this)'" title="Eliminar de favoritos">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.5783 8.50903 2.9987 7.05 2.9987C5.59096 2.9987 4.19169 3.5783 3.16 4.61C2.1283 5.6417 1.5487 7.04097 1.5487 8.5C1.5487 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7563 11.2728 22.0329 10.6053C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.06211 22.0329 6.39467C21.7563 5.72723 21.351 5.1208 20.84 4.61V4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="currentColor"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <footer>
         <div class="footer-logos">
             <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
@@ -70,25 +232,8 @@
             &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software. Todos los derechos reservados.
         </div>
     </footer>
+
+    <script src="/js/favoritos.js"></script>
     <script src="/js/theme-switcher.js"></script>
-    <script>
-    function eliminarFavorito(id) {
-        if (confirm('¿Seguro que quieres eliminar este favorito?')) {
-            fetch('/favoritos/eliminar', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: 'id=' + id
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    location.reload();
-                } else {
-                    alert(data.mensaje);
-                }
-            });
-        }
-    }
-    </script>
 </body>
 </html>

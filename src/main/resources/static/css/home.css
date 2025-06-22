@@ -1,0 +1,548 @@
+/* OVERRIDE del main-layout para asegurar distribución 50/50 */
+.main-layout {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Forzar que ambas secciones sean exactamente 50% */
+.info-section.home-info {
+    width: 50% !important;
+    flex: 0 0 50%;
+    justify-content: flex-start;
+    padding: 30px;
+    box-sizing: border-box;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+/* Panel de home COMPLETAMENTE AJUSTADO al espacio */
+.home-panel {
+    width: 50% !important;
+    flex: 0 0 50%;
+    background-color: var(--bg-primary);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Eliminar border-radius y box-shadow que causaban las esquinas */
+}
+
+/* Contenedor interno con bordes redondeados */
+.home-panel-inner {
+    background-color: var(--bg-primary);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px var(--shadow-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+}
+
+html[data-theme="dark"] .info-section.home-info {
+    background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+}
+
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]):not([data-theme="dark"]) .info-section.home-info {
+        background: linear-gradient(135deg, #2d1b69 0%, #11998e 100%);
+    }
+}
+
+/* Banner de bienvenida */
+.welcome-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.banner-content h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.banner-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 350px;
+}
+
+/* Elementos flotantes animados */
+.banner-animation {
+    position: relative;
+    width: 180px;
+    height: 140px;
+}
+
+.floating-elements {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.float-element {
+    position: absolute;
+    font-size: 1.8rem;
+    animation: float 3s ease-in-out infinite;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.float-element:hover {
+    transform: scale(1.2);
+}
+
+.float-element:nth-child(1) { top: 10%; left: 20%; animation-delay: 0s; }
+.float-element:nth-child(2) { top: 30%; right: 10%; animation-delay: 0.5s; }
+.float-element:nth-child(3) { bottom: 40%; left: 10%; animation-delay: 1s; }
+.float-element:nth-child(4) { top: 60%; left: 50%; animation-delay: 1.5s; }
+.float-element:nth-child(5) { bottom: 10%; right: 30%; animation-delay: 2s; }
+.float-element:nth-child(6) { top: 40%; left: 60%; animation-delay: 2.5s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Estadísticas rápidas */
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+    font-size: 1.8rem;
+    background: rgba(255, 255, 255, 0.2);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-info h3 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.stat-info p {
+    margin: 5px 0 0 0;
+    opacity: 0.9;
+    font-size: 0.85rem;
+}
+
+/* Header del usuario - SIN padding lateral extra */
+.home-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    padding: 20px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    border-radius: 20px 20px 0 0;
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar-circle {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.avatar-initial {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+}
+
+.user-info h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.user-role {
+    margin: 5px 0 0 0;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.escudo {
+    height: 40px;
+    filter: brightness(0) invert(1);
+    transition: transform 0.3s ease;
+}
+
+.escudo:hover {
+    transform: scale(1.1);
+}
+
+/* Contenido del home - OPTIMIZADO para el espacio */
+.home-content {
+    padding: 20px 25px 25px 25px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    min-height: 0;
+}
+
+/* Saludo por hora - COMPACTADO */
+.greeting-time {
+    text-align: center;
+    padding: 15px;
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    flex-shrink: 0;
+}
+
+.greeting-time span {
+    display: block;
+}
+
+#timeGreeting {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 6px;
+}
+
+#currentTime {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+#currentDate {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+}
+
+/* Tarjeta de perfil - COMPACTADA */
+.profile-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 18px;
+    border: 2px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.profile-card h3 {
+    margin: 0 0 12px 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.detail-item:hover {
+    transform: translateX(3px);
+}
+
+.detail-item svg {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-color);
+}
+
+.detail-item span {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+/* Tarjetas de acción - OPTIMIZADAS */
+.action-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.action-card {
+    padding: 14px 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.action-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.action-card:hover::before {
+    left: 100%;
+}
+
+.action-card.primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    color: white;
+}
+
+.action-card.secondary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    color: white;
+}
+
+.action-card.accent {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+    color: white;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.card-icon {
+    font-size: 1.6rem;
+    min-width: 32px;
+}
+
+.action-card h3 {
+    margin: 0 0 2px 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.action-card p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 0.8rem;
+}
+
+.card-arrow {
+    margin-left: auto;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.action-card:hover .card-arrow {
+    transform: translateX(4px);
+}
+
+/* Actividad reciente - COMPACTADA */
+.recent-activity {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 18px;
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-activity h3 {
+    margin: 0 0 12px 0;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-primary);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.activity-item:hover {
+    transform: translateX(3px);
+}
+
+.activity-icon {
+    font-size: 1.2rem;
+    min-width: 30px;
+    text-align: center;
+}
+
+.activity-content p {
+    margin: 0 0 2px 0;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.85rem;
+}
+
+.activity-content span {
+    color: var(--text-secondary);
+    font-size: 0.72rem;
+}
+
+/* Sección de logout - COMPACTADA */
+.logout-section {
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 10px;
+}
+
+.logout-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    background: #ef4444;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.85rem;
+}
+
+.logout-link:hover {
+    background: #dc2626;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.logout-link svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+    .banner-content h1 {
+        font-size: 1.9rem;
+    }
+    
+    .banner-animation {
+        width: 140px;
+        height: 110px;
+    }
+    
+    .float-element {
+        font-size: 1.5rem;
+    }
+    
+    .quick-stats {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .main-layout {
+        flex-direction: column;
+    }
+    
+    .info-section.home-info,
+    .home-panel {
+        width: 100% !important;
+        flex: none;
+    }
+    
+    .home-panel {
+        padding: 15px;
+    }
+    
+    .welcome-banner {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    
+    .banner-content h1 {
+        font-size: 1.8rem;
+    }
+    
+    .quick-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .home-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px 20px;
+    }
+    
+    .user-avatar {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .home-content {
+        padding: 15px 20px 20px 20px;
+        gap: 15px;
+    }
+}

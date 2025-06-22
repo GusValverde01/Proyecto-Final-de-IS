@@ -3,118 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro Exitoso</title>
+    <title>Registro Exitoso - ESCOM</title>
     <link rel="stylesheet" href="/css/theme.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: var(--bg-primary); /* Fondo del tema */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-
-        .container {
-            width: 320px;
-            padding: 30px;
-            background-color: var(--bg-secondary);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            box-shadow: var(--shadow);
-            transition: box-shadow 0.3s ease;
-        }
-
-        .container:hover {
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
-        }
-
-        .register-form {
-            text-align: center;
-        }
-
-        .register-form h2 {
-            color: var(--primary-color);
-            margin-bottom: 24px;
-            font-size: 1.8em;
-            font-weight: 600;
-        }
-
-        .gif {
-            display: block;
-            margin: 0 auto 20px auto;
-            max-width: 100%;
-            border-radius: 8px;
-        }
-
-        .message {
-            font-size: 1.1em;
-            line-height: 1.5;
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-        }
-
-        .btn-login {
-            background-color: var(--primary-color);
-            color: var(--text-primary);
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 1em;
-            font-weight: 500;
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-login:hover {
-            background-color: var(--primary-dark);
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-login:active {
-            transform: translateY(1px);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .back-to-home {
-            display: block;
-            margin-top: 20px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-size: 0.9em;
-            transition: color 0.2s ease;
-        }
-
-        .back-to-home:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/registroExitoso.css">
 </head>
 <body>
-    <div class="container">
-        <div class="register-form">
-            <!-- GIF agregado -->
-            <img src="https://i.redd.it/zivj0410iigd1.gif" alt="GIF de celebración" class="gif">
-            <h2>¡Registro Exitoso!</h2>
-            <p class="message">Has sido registrado con éxito. Ahora puedes iniciar sesión con tu cuenta.</p>
-            <button type="button" class="btn-login" onclick="location.href='/login'">Iniciar Sesión</button>
+    <div class="theme-switcher-global">
+        <button id="theme-toggle" aria-label="Cambiar tema">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></svg>
+            <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/></svg>
+        </button>
+        <div class="theme-dropdown">
+            <div class="theme-option" data-theme="light"><span class="theme-icon">☀️</span><span>Claro</span></div>
+            <div class="theme-option" data-theme="dark"><span class="theme-icon">🌙</span><span>Oscuro</span></div>
+            <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
     </div>
-    <!-- Theme Switcher -->
-    <div class="theme-switcher">
-        <span class="theme-switcher-label">Tema:</span>
-        <select id="theme-select">
-            <option value="light">Claro</option>
-            <option value="dark">Oscuro</option>
-            <option value="system">Sistema</option>
-        </select>
+    
+    <div class="main-layout">
+        <div class="info-section success-info">
+            <h1>Sistema de Búsqueda y Recomendación Multimodal</h1>
+            <div class="success-animation">
+                <div class="checkmark-container">
+                    <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                        <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                        <path class="checkmark-check" fill="none" d="m14.1 27.2l7.1 7.2 16.7-16.8"/>
+                    </svg>
+                </div>
+                <div class="confetti">
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                    <div class="confetti-piece"></div>
+                </div>
+            </div>
+            <div class="success-benefits">
+                <p><strong>¡Bienvenido a nuestra comunidad!</strong><br>
+                Tu cuenta ha sido creada exitosamente.</p>
+                <ul>
+                    <li>✨ Acceso completo a todas las funcionalidades</li>
+                    <li>🔍 Búsquedas personalizadas disponibles</li>
+                    <li>💾 Historial y favoritos activados</li>
+                    <li>🎨 Personalización de temas habilitada</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="login-panel success-panel">
+            <div class="login-header">
+                <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM IPN" class="escudo">
+            </div>
+            <div class="login-form">
+                <h2>¡Registro Completado!</h2>
+                
+                <div class="success-message">
+                    <div class="success-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                    </div>
+                    <p>Tu cuenta ha sido creada con éxito. Ya puedes iniciar sesión y comenzar a explorar todas las funcionalidades del sistema.</p>
+                </div>
+                
+                <div class="user-info">
+                    <h3>Próximos pasos:</h3>
+                    <div class="steps">
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <span class="step-text">Inicia sesión con tus credenciales</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <span class="step-text">Configura tu perfil personal</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span class="step-text">Comienza a explorar y buscar</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="/login" class="btn-login primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                        </svg>
+                        Iniciar Sesión
+                    </a>
+                    <a href="/register" class="btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.42-1.41L7.83 13H20v-2z"/>
+                        </svg>
+                        Volver al Inicio
+                    </a>
+                </div>
+                
+                <div class="divider"><span>O</span></div>
+                <div class="help-section">
+                    <p>¿Necesitas ayuda? <a href="mailto:soporte@escom.ipn.mx">Contacta al soporte</a></p>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <footer>
+        <div class="footer-logos">
+            <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
+            <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM" title="ESCOM IPN">
+        </div>
+        <div class="footer-links">
+            <a href="https://www.ipn.mx/" target="_blank" rel="noopener">IPN</a>|
+            <a href="https://www.escom.ipn.mx/" target="_blank" rel="noopener">ESCOM</a>|
+            <a href="#">Aviso de privacidad</a>|
+            <a href="#">Contacto</a>
+        </div>
+        <div class="footer-copy">
+            &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software.
+        </div>
+    </footer>
+    
+    <script src="/js/registroExitoso.js"></script>
     <script src="/js/theme-switcher.js"></script>
 </body>
 </html>

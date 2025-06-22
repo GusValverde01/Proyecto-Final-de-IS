@@ -1,0 +1,419 @@
+/* Sección de información personalizada para éxito */
+.info-section.success-info {
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+}
+
+/* Tema oscuro MANUAL */
+html[data-theme="dark"] .info-section.success-info {
+    background: linear-gradient(135deg, #1b3c1d 0%, #2e5932 100%);
+}
+
+/* Tema SISTEMA oscuro - aquí está el fix */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme="light"]):not([data-theme="dark"]) .info-section.success-info {
+        background: linear-gradient(135deg, #1b3c1d 0%, #2e5932 100%);
+    }
+    
+    html:not([data-theme="light"]):not([data-theme="dark"]) .success-message {
+        background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+        border-color: #16a34a;
+    }
+    
+    html:not([data-theme="light"]):not([data-theme="dark"]) .checkmark,
+    html:not([data-theme="light"]):not([data-theme="dark"]) .checkmark-circle,
+    html:not([data-theme="light"]):not([data-theme="dark"]) .checkmark-check {
+        stroke: #22c55e;
+    }
+    
+    html:not([data-theme="light"]):not([data-theme="dark"]) .success-icon {
+        color: #22c55e;
+    }
+    
+    html:not([data-theme="light"]):not([data-theme="dark"]) .success-panel {
+        border-color: #22c55e;
+        box-shadow: 0 8px 40px 0 rgba(34, 197, 94, 0.2);
+    }
+}
+
+.success-benefits {
+    margin-top: 20px;
+}
+
+.success-benefits p {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    max-width: 650px;
+    text-align: center;
+}
+
+.success-benefits ul {
+    margin: 8px 0 0 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    list-style: none;
+    padding: 0;
+}
+
+.success-benefits li {
+    margin-bottom: 8px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Animación de checkmark */
+.success-animation {
+    position: relative;
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkmark-container {
+    position: relative;
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: #22c55e;
+    stroke-miterlimit: 10;
+    animation: checkmark-fill 0.4s ease-in-out 0.4s forwards, checkmark-scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark-circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #22c55e;
+    fill: none;
+    animation: checkmark-stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark-check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    stroke: #22c55e;
+    animation: checkmark-stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes checkmark-stroke {
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes checkmark-scale {
+    0%, 100% {
+        transform: none;
+    }
+    50% {
+        transform: scale3d(1.1, 1.1, 1);
+    }
+}
+
+@keyframes checkmark-fill {
+    100% {
+        box-shadow: inset 0px 0px 0px 30px #22c55e;
+    }
+}
+
+/* Confetti animation */
+.confetti {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: var(--primary-color);
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+.confetti-piece:nth-child(1) {
+    background: #ff6b6b;
+    left: -40px;
+    animation-delay: 0s;
+    animation-duration: 2.5s;
+}
+
+.confetti-piece:nth-child(2) {
+    background: #4ecdc4;
+    left: -20px;
+    animation-delay: 0.2s;
+    animation-duration: 2.8s;
+}
+
+.confetti-piece:nth-child(3) {
+    background: #45b7d1;
+    left: 0px;
+    animation-delay: 0.4s;
+    animation-duration: 3s;
+}
+
+.confetti-piece:nth-child(4) {
+    background: #96ceb4;
+    left: 20px;
+    animation-delay: 0.6s;
+    animation-duration: 2.7s;
+}
+
+.confetti-piece:nth-child(5) {
+    background: #feca57;
+    left: 40px;
+    animation-delay: 0.8s;
+    animation-duration: 2.9s;
+}
+
+.confetti-piece:nth-child(6) {
+    background: #ff9ff3;
+    left: -30px;
+    animation-delay: 1s;
+    animation-duration: 2.6s;
+}
+
+.confetti-piece:nth-child(7) {
+    background: #54a0ff;
+    left: 10px;
+    animation-delay: 1.2s;
+    animation-duration: 3.1s;
+}
+
+.confetti-piece:nth-child(8) {
+    background: #5f27cd;
+    left: 30px;
+    animation-delay: 1.4s;
+    animation-duration: 2.4s;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(200px) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* Panel de éxito */
+.success-panel {
+    border: 2px solid #22c55e;
+    box-shadow: 0 8px 40px 0 rgba(34, 197, 94, 0.2);
+}
+
+/* Mensaje de éxito */
+.success-message {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+    border: 1px solid #22c55e;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+html[data-theme="dark"] .success-message {
+    background: linear-gradient(135deg, #052e16 0%, #14532d 100%);
+    border-color: #16a34a;
+}
+
+.success-icon {
+    color: #22c55e;
+    font-size: 24px;
+    min-width: 24px;
+    margin-top: 2px;
+}
+
+.success-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.success-message p {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Información del usuario y pasos */
+.user-info {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.user-info h3 {
+    margin: 0 0 16px 0;
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 0;
+}
+
+.step-number {
+    background: var(--primary-color);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 24px;
+}
+
+.step-text {
+    color: var(--text-primary);
+    font-size: 15px;
+}
+
+/* Botones de acción - ACTUALIZADOS */
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.btn-login.primary,
+.btn-secondary {
+    width: 100%;
+    max-width: 280px;
+    padding: 14px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+    text-align: center;
+    box-sizing: border-box;
+    min-height: 50px;
+}
+
+.btn-login.primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.btn-login.primary:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.btn-secondary {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-1px);
+}
+
+.btn-login.primary svg,
+.btn-secondary svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* Sección de ayuda */
+.help-section {
+    text-align: center;
+    margin-top: 16px;
+}
+
+.help-section p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.help-section a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.help-section a:hover {
+    text-decoration: underline;
+}
+
+/* Responsivo - ACTUALIZADO */
+@media (max-width: 700px) {
+    .info-section.success-info {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+    
+    .success-benefits p {
+        font-size: 1.1rem;
+    }
+    
+    .success-benefits ul {
+        font-size: 0.95rem;
+    }
+    
+    .checkmark {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .action-buttons {
+        gap: 10px;
+    }
+    
+    .btn-login.primary,
+    .btn-secondary {
+        padding: 12px 16px;
+        font-size: 15px;
+        max-width: 100%;
+        min-height: 46px;
+    }
+}

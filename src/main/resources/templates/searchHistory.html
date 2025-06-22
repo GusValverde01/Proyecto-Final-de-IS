@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-    <title>Historial de Búsquedas</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de Búsquedas - ESCOM</title>
     <link rel="stylesheet" href="/css/theme.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/searchHistory.css">
 </head>
 <body>
     <div class="theme-switcher-global">
@@ -24,35 +27,129 @@
             <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
     </div>
+
     <div class="main-layout">
-        <div class="history-panel wide">
-            <div class="history-header">
-                <h1>Historial de Búsquedas</h1>
-            </div>
-            <div class="history-content">
-                <div class="history-actions">
-                    <a href="/home" class="btn-home">Regresar a inicio</a>
-                    <a th:href="@{/search}" class="btn-register">Realizar nueva búsqueda</a>
+        <div class="history-panel">
+            <div class="history-panel-inner">
+                <!-- Header con estadísticas -->
+                <div class="history-header">
+                    <div class="header-content">
+                        <div class="title-section">
+                            <h1>
+                                <svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Historial de Búsquedas
+                            </h1>
+                            <p>Revisa tus búsquedas anteriores y vuelve a explorar contenido</p>
+                        </div>
+                        
+                        <div class="history-stats">
+                            <div class="stat-item">
+                                <span class="stat-number" th:text="${#lists.size(historial)}">0</span>
+                                <span class="stat-label">Total de búsquedas</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="uniqueSearches">0</span>
+                                <span class="stat-label">Búsquedas únicas</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Búsqueda</th>
-                            <th>Fecha</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="item, iterStat : ${historial}">
-                            <td th:text="${iterStat.count}"></td>
-                            <td th:text="${item.busqueda}"></td>
-                            <td th:text="${#temporals.format(item.fecha, 'dd/MM/yyyy HH:mm')}"></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+                <!-- Acciones y filtros -->
+                <div class="history-actions">
+                    <div class="action-buttons">
+                        <a href="/home" class="btn-action secondary">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 12L5 10M5 10L12 3L19 10M5 10V20C5 20.5523 5.44772 21 6 21H9M19 10L21 12M19 10V20C19 20.5523 18.5523 21 18 21H15M9 21C9.55228 21 10 20.5523 10 20V16C10 15.4477 10.4477 15 11 15H13C13.5523 15 14 15.4477 14 16V20C14 20.5523 14.4477 21 15 21M9 21H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Inicio
+                        </a>
+                        <a th:href="@{/search}" class="btn-action primary">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Nueva Búsqueda
+                        </a>
+                    </div>
+
+                    <div class="filter-section">
+                        <div class="search-filter">
+                            <input type="text" id="searchFilter" placeholder="Filtrar búsquedas...">
+                            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 21L16.514 16.506M19 10.5C19 15.194 15.194 19 10.5 19S2 15.194 2 10.5S5.806 2 10.5 2S19 5.806 19 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        
+                        <select id="sortFilter">
+                            <option value="newest">Más recientes</option>
+                            <option value="oldest">Más antiguos</option>
+                            <option value="alphabetical">Alfabético</option>
+                        </select>
+                        
+                        <button id="clearHistory" class="btn-clear" title="Limpiar historial">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 6H5H21M8 6V4C8 3.44772 8.44772 3 9 3H15C15.5523 3 16 3.44772 16 4V6M19 6V20C19 20.5523 18.5523 21 18 21H6C5.44772 21 5 20.5523 5 20V6H19ZM10 11V17M14 11V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Contenido del historial -->
+                <div class="history-content">
+                    <div th:if="${#lists.isEmpty(historial)}" class="empty-state">
+                        <div class="empty-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>No hay búsquedas registradas</h3>
+                        <p>Comienza explorando contenido para ver tu historial aquí</p>
+                        <a th:href="@{/search}" class="btn-action primary">Realizar primera búsqueda</a>
+                    </div>
+
+                    <div th:unless="${#lists.isEmpty(historial)}" class="history-grid" id="historyGrid">
+                        <div th:each="item, iterStat : ${historial}" class="history-item" 
+                             th:data-search="${item.busqueda}" 
+                             th:data-date="${item.fecha}">
+                            <div class="item-header">
+                                <div class="item-number">
+                                    <span th:text="${#lists.size(historial) - iterStat.index}"></span>
+                                </div>
+                                <div class="item-time" th:text="${#temporals.format(item.fecha, 'HH:mm')}"></div>
+                            </div>
+                            
+                            <div class="item-content">
+                                <h3 class="search-term" th:text="${item.busqueda}"></h3>
+                                <p class="search-date">
+                                    <svg class="date-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 2V6M16 2V6M3 10H21M5 4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span th:text="${#temporals.format(item.fecha, 'dd/MM/yyyy')}"></span>
+                                </p>
+                            </div>
+                            
+                            <div class="item-actions">
+                                <button class="action-btn repeat-search" th:data-search="${item.busqueda}" title="Repetir búsqueda">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 4V10H7M23 20V14H17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M20.49 9C19.9828 7.56678 19.1209 6.28392 17.9845 5.27304C16.8482 4.26216 15.4745 3.55692 13.9917 3.21993C12.5089 2.88295 10.9652 2.92404 9.50481 3.33978C8.04439 3.75552 6.71475 4.53313 5.64 5.6L1 10M23 14L18.36 18.4C17.2853 19.4669 15.9556 20.2445 14.4952 20.6602C13.0348 21.076 11.4911 21.117 10.0083 20.7801C8.52547 20.4431 7.1518 19.7378 6.01547 18.727C4.87913 17.7161 4.01717 16.4332 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                                <button class="action-btn delete-item" th:data-index="${iterStat.index}" title="Eliminar del historial">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
     <footer>
         <div class="footer-logos">
             <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
@@ -68,6 +165,8 @@
             &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software. Todos los derechos reservados.
         </div>
     </footer>
+
+    <script src="/js/searchHistory.js"></script>
     <script src="/js/theme-switcher.js"></script>
 </body>
 </html>
