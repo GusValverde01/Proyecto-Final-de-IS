@@ -71,8 +71,7 @@ public class Usuario {
         this.roles = roles;
     }
 
-    public String getCorreo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getCorreo'");
-    }
+public String getCorreo() {
+    return this.email;
+}
 }

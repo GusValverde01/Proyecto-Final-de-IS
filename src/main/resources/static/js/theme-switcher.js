@@ -30,17 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
   
   // Función para establecer el tema
-  function setTheme(theme) {
-      if (theme === 'system') {
-          // Detectar preferencia del sistema
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          document.documentElement.setAttribute('data-theme', theme);
-          document.documentElement.classList.toggle('dark-mode', prefersDark);
-      } else {
-          document.documentElement.setAttribute('data-theme', theme);
-          document.documentElement.classList.toggle('dark-mode', theme === 'dark');
-      }
-  }
+function setTheme(theme) {
+    if (theme === 'system') {
+        document.documentElement.removeAttribute('data-theme');
+    } else {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+}
   
   // Escuchar cambios en las preferencias del sistema
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {

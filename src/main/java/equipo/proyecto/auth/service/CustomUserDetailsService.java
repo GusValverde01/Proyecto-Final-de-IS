@@ -8,17 +8,30 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service("customUserDetailsService")
+import java.util.Optional;
+
+@Service
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String nombre) throws UsernameNotFoundException {
-        Usuario usuario = usuarioRepository.findByNombre(nombre)
-            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado: " + nombre));
-        return new CustomUserDetails(usuario);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("DEBUG: Buscando usuario: " + username);
+        
+        Optional<Usuario> usuario = usuarioRepository.findByNombre(username);
+        
+        if (usuario.isPresent()) {
+            Usuario u = usuario.get();
+            System.out.println("DEBUG: Usuario encontrado: " + u.getNombre());
+            System.out.println("DEBUG: Password hash almacenado: " + u.getPassword());
+            System.out.println("DEBUG: Roles: " + u.getRoles().size());
+            
+            return new CustomUserDetails(u);
+        } else {
+            System.out.println("DEBUG: Usuario no encontrado: " + username);
+            throw new UsernameNotFoundException("Usuario no encontrado: " + username);
+        }
     }
-
 }

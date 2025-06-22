@@ -1,13 +1,13 @@
 package equipo.proyecto.auth.service;
 
+import equipo.proyecto.auth.entity.Rol;
 import equipo.proyecto.auth.entity.Usuario;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
 
@@ -16,19 +16,12 @@ public class CustomUserDetails implements UserDetails {
     public CustomUserDetails(Usuario usuario) {
         this.usuario = usuario;
     }
-    //getter con acceso a usuario
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-    
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // Convertir los roles del usuario a GrantedAuthority
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        usuario.getRoles().forEach(rol -> {
-            authorities.add(new SimpleGrantedAuthority(rol.getNombre())); // Aquí asume que 'nombre' es el nombre del rol
-        });
-        return authorities;
+        return usuario.getRoles().stream()
+                .map(rol -> new SimpleGrantedAuthority(rol.getNombre()))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -59,5 +52,10 @@ public class CustomUserDetails implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    // Método para obtener el usuario completo
+    public Usuario getUsuario() {
+        return usuario;
     }
 }

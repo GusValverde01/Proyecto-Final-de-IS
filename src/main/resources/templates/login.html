@@ -5,277 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login ESCOM</title>
     <link rel="stylesheet" href="/css/theme.css">
-    <style>
-        body {
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-primary);
-        }
-
-        .container {
-            width: 420px;
-            background-color: var(--bg-primary);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 24px var(--shadow-color);
-            animation: fadeIn 0.8s ease;
-            /* Eliminar margen que puede causar desplazamiento */
-            margin: 0;
-        }
-
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .header {
-            background-color: var(--bg-secondary);
-            padding: 25px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .escudo {
-            width: 140px;
-            height: auto;
-            margin-bottom: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .escudo:hover {
-            transform: scale(1.05);
-        }
-
-        .login-form {
-            padding: 30px 40px;
-            color: var(--text-primary);
-        }
-
-        .login-form h2 {
-            color: var(--primary-color);
-            margin-bottom: 30px;
-            font-size: 20px;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-            font-weight: 500;
-            font-size: 14px;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 48px;
-            padding: 10px 15px;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 16px;
-            background-color: var(--bg-tertiary);
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-        }
-
-        .input-group input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 66, 129, 0.1);
-            outline: none;
-        }
-
-        .input-group input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        /* Estilos para el campo de contraseña */
-        .password-container {
-            position: relative;
-        }
-
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-size: 14px;
-            user-select: none;
-            display: flex;
-            align-items: center;
-        }
-
-        .password-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        .eye-icon {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
-
-        .btn-login {
-            background-color: var(--primary-color);
-            color: white;
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-
-        .btn-login:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-
-        .btn-login:active {
-            transform: translateY(0);
-        }
-
-        .register-container {
-            text-align: center;
-            padding: 20px 0 10px;
-        }
-
-        .btn-register {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            font-size: 15px;
-        }
-
-        .btn-register:hover {
-            background-color: var(--secondary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px var(--shadow-color);
-        }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: var(--border-color);
-        }
-
-        .divider span {
-            padding: 0 10px;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: 100%;
-            }
-            
-            .login-form {
-                padding: 20px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM IPN" class="escudo">
+    <div class="theme-switcher-global">
+        <button id="theme-toggle" aria-label="Cambiar tema">
+            <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/></svg>
+            <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/></svg>
+            <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/></svg>
+        </button>
+        <div class="theme-dropdown">
+            <div class="theme-option" data-theme="light"><span class="theme-icon">☀️</span><span>Claro</span></div>
+            <div class="theme-option" data-theme="dark"><span class="theme-icon">🌙</span><span>Oscuro</span></div>
+            <div class="theme-option" data-theme="system"><span class="theme-icon">💻</span><span>Sistema</span></div>
         </div>
-        <div class="login-form">
-            <h2>Sistema de Búsqueda y Recomendación Multimodal</h2>
-            <h2>Inicio de sesión</h2>
-            <form action="/login" method="post">
-                <div class="input-group">
-                    <label for="username">Usuario</label>
-                    <input type="text" id="username" name="username" placeholder="Ingresa tu nombre de usuario" autocomplete="username" required>
-                </div>
-                <div class="input-group">
-                    <label for="password">Contraseña</label>
-                    <div class="password-container">
-                        <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" autocomplete="current-password" required>
-                        <span class="password-toggle" onclick="togglePassword()">
-                            <svg class="eye-icon" id="eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
-                            </svg>
-                        </span>
-                    </div>
-                </div>
-                <button type="submit" class="btn-login">Iniciar sesión</button>
-            </form>
-            <div class="divider">
-                <span>O</span>
+    </div>
+    <div class="main-layout">
+        <div class="info-section">
+            <h1>Sistema de Búsqueda y Recomendación Multimodal</h1>
+            <div class="carousel-dinamico" id="carousel-dinamico">
+                <img src="https://www.nintenderos.com/wp-content/uploads/2022/07/animes.jpg" alt="Anime" class="active">
+                <img src="https://sm.ign.com/ign_latam/screenshot/default/personajes-vg_eskc.jpg" alt="Videojuegos">
+                <img src="https://static.emol.cl/emol50/Fotos/2021/12/16/file_20211216120011.jpg" alt="Libros">
+                <img src="https://pastomagic.com/wp-content/uploads/2021/05/magos-en-series-de-television.jpg" alt="Series">
+                <div class="carousel-caption" id="carousel-caption">Anime</div>
             </div>
-            <div class="register-container">
-                <a href="/register" class="btn-register">Registrar nuevo usuario</a>
+            <p style="margin-top:12px;">
+                Bienvenido al sistema desarrollado como proyecto final de Ingeniería de Software en ESCOM-IPN.<br>
+                <strong>Características:</strong>
+                <ul style="margin: 8px 0 0 18px; color: var(--text-secondary); font-size: 1rem;">
+                    <li>Búsqueda avanzada de recursos educativos y multimedia.</li>
+                    <li>Historial y favoritos personalizados.</li>
+                    <li>Interfaz adaptable y segura.</li>
+                </ul>
+            </p>
+        </div>
+        <div class="login-panel">
+            <div class="login-header">
+                <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM IPN" class="escudo">
+            </div>
+            <div class="login-form">
+                <h2>Inicio de sesión</h2>
+                <!-- ...existing code... -->
+<form action="/login" method="post">
+    <div class="input-group">
+        <label for="nombre">Usuario</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Usuario" autocomplete="username" required>
+    </div>
+    <div class="input-group">
+        <label for="password">Contraseña</label>
+        <div class="password-container">
+            <input type="password" id="password" name="password" placeholder="Contraseña" autocomplete="current-password" required>
+            <span class="password-toggle" onclick="togglePassword()">
+                <svg class="eye-icon" id="eye-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                </svg>
+            </span>
+        </div>
+    </div>
+    <button type="submit" class="btn-login">Iniciar sesión</button>
+</form>
+<!-- ...existing code... -->
+                <div class="divider"><span>O</span></div>
+                <div class="register-container">
+                    <a href="/register" class="btn-register">Registrar nuevo usuario</a>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Theme Switcher -->
-<div class="theme-switcher">
-    <button id="theme-toggle" aria-label="Cambiar tema">
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 18C8.68629 18 6 15.3137 6 12C6 8.68629 8.68629 6 12 6C15.3137 6 18 8.68629 18 12C18 15.3137 15.3137 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.51472 4.92893L4.92893 3.51472L7.05025 5.63604L5.63604 7.05025L3.51472 4.92893ZM16.9497 18.364L18.364 16.9497L20.4853 19.0711L19.0711 20.4853L16.9497 18.364ZM19.0711 3.51472L20.4853 4.92893L18.364 7.05025L16.9497 5.63604L19.0711 3.51472ZM5.63604 16.9497L7.05025 18.364L4.92893 20.4853L3.51472 19.0711L5.63604 16.9497ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z"/>
-        </svg>
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M10 7C10 10.866 13.134 14 17 14C18.9584 14 20.729 13.1957 21.9995 11.8995C22 11.933 22 11.9665 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C12.0335 2 12.067 2 12.1005 2.00049C10.8043 3.27098 10 5.04157 10 7ZM4 12C4 16.4183 7.58172 20 12 20C15.0583 20 17.7158 18.2839 19.062 15.7621C18.3945 15.9187 17.7035 16 17 16C12.0294 16 8 11.9706 8 7C8 6.29648 8.08133 5.60547 8.2379 4.938C5.71611 6.28423 4 8.9417 4 12Z"/>
-        </svg>
-        <svg class="system-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M4 6.17157C4 4.96711 4.96711 4 6.17157 4H17.8284C19.0329 4 20 4.96711 20 6.17157V17.8284C20 19.0329 19.0329 20 17.8284 20H6.17157C4.96711 20 4 19.0329 4 17.8284V6.17157ZM6.17157 6C6.07714 6 6 6.07714 6 6.17157V15.8284C6 15.9229 6.07714 16 6.17157 16H17.8284C17.9229 16 18 15.9229 18 15.8284V6.17157C18 6.07714 17.9229 6 17.8284 6H6.17157ZM7.5 18C7.5 17.7239 7.72386 17.5 8 17.5H16C16.2761 17.5 16.5 17.7239 16.5 18C16.5 18.2761 16.2761 18.5 16 18.5H8C7.72386 18.5 7.5 18.2761 7.5 18Z"/>
-        </svg>
-    </button>
-    <div class="theme-dropdown">
-        <div class="theme-option" data-theme="light">
-            <span class="theme-icon">☀️</span>
-            <span>Claro</span>
+    <footer>
+        <div class="footer-logos">
+            <img src="https://images.seeklogo.com/logo-png/7/2/ipn-logo-png_seeklogo-73340.png" alt="IPN" title="Instituto Politécnico Nacional">
+            <img src="https://www.escom.ipn.mx/images/logoESCOM2x.png" alt="ESCOM" title="ESCOM IPN">
         </div>
-        <div class="theme-option" data-theme="dark">
-            <span class="theme-icon">🌙</span>
-            <span>Oscuro</span>
+        <div class="footer-links">
+            <a href="https://www.ipn.mx/" target="_blank" rel="noopener">IPN</a>|
+            <a href="https://www.escom.ipn.mx/" target="_blank" rel="noopener">ESCOM</a>|
+            <a href="#">Aviso de privacidad</a>|
+            <a href="#">Contacto</a>
         </div>
-        <div class="theme-option" data-theme="system">
-            <span class="theme-icon">💻</span>
-            <span>Sistema</span>
+        <div class="footer-copy">
+            &copy; 2025 ESCOM-IPN. Proyecto final de Ingeniería de Software.
         </div>
-    </div>
-</div>
+    </footer>
     <script>
+        // Carrusel dinámico de imágenes
+        const images = document.querySelectorAll('.carousel-dinamico img');
+        const captions = ["Anime", "Videojuegos", "Libros", "Series"];
+        const caption = document.getElementById('carousel-caption');
+        let current = 0;
+        setInterval(() => {
+            images[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+            caption.textContent = captions[current];
+        }, 2600);
+
+        // Mostrar/ocultar contraseña
         function togglePassword() {
             const passwordField = document.getElementById('password');
             const eyeIcon = document.getElementById('eye-icon');
-            
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
                 eyeIcon.innerHTML = '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>';
@@ -286,6 +115,5 @@
         }
     </script>
     <script src="/js/theme-switcher.js"></script>
-
 </body>
 </html>

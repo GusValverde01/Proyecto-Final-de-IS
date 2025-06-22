@@ -30,11 +30,31 @@ public class ContentSearchController {
     @Autowired
     private HistorialRepository historialRepository;
 
-    // Página inicial de búsqueda
-    @GetMapping("/search")
-    public String searchPage() {
-        return "search"; // Página de búsqueda
+@GetMapping("/search")
+public String searchPage(Model model, Authentication authentication) {
+    if (authentication != null && authentication.isAuthenticated()) {
+        String username = authentication.getName();
+        Usuario usuario = usuarioRepository.findByNombre(username).orElse(null);
+        if (usuario != null) {
+            List<Historial> historial = historialRepository.findByUsuarioId(usuario.getId());
+            // Ejemplo: para cada búsqueda, asocia una imagen (puedes mejorar esto)
+            List<Map<String, String>> recomendaciones = historial.stream()
+                .distinct()
+                .limit(5)
+                .map(h -> Map.of(
+                    "busqueda", h.getBusqueda(),
+                    "img", "/img/recomendaciones/" + h.getBusqueda().toLowerCase() + ".jpg"
+                ))
+                .toList();
+            model.addAttribute("recomendaciones", recomendaciones);
+        } else {
+            model.addAttribute("recomendaciones", List.of());
+        }
+    } else {
+        model.addAttribute("recomendaciones", List.of());
     }
+    return "search";
+}
 
     // Realizar búsqueda con tipos adicionales y registrar historial
     @GetMapping("/search/results")

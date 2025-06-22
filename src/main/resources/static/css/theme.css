@@ -1,164 +1,125 @@
 :root {
-  /* Light theme (default) */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9f9f9;
-  --bg-tertiary: #f2f2f2;
-  --text-primary: #333333;
-  --text-secondary: #666666;
-  --primary-color: #004281;
-  --primary-dark: #00325e;
-  --secondary-color: #6c9c2f;
-  --secondary-dark: #588021;
-  --border-color: #ddd;
-  --shadow-color: rgba(0, 0, 0, 0.15);
-  --card-bg: #ffffff;
-  --input-bg: #f9f9f9;
+    --primary-color: #004281;
+    --primary-dark: #00355b;
+    --secondary-color: #7cbb30;
+    --secondary-dark: #5f892c;
+    --bg-primary: #fff;
+    --bg-secondary: #f5f5f5;
+    --input-bg: #f9f9f9;
+    --border-color: #b0b0b0;
+    --text-primary: #222;
+    --text-secondary: #444;
+    --shadow-color: #b0b0b0;
 }
 
-[data-theme="dark"] {
-  --bg-primary: #121212;
-  --bg-secondary: #1e1e1e;
-  --bg-tertiary: #2a2a2a;
-  --text-primary: #e0e0e0;
-  --text-secondary: #a0a0a0;
-  --primary-color: #0d6efd;
-  --primary-dark: #0b5ed7;
-  --secondary-color: #7cbb30;
-  --secondary-dark: #69a128;
-  --border-color: #444;
-  --shadow-color: rgba(0, 0, 0, 0.3);
-  --card-bg: #2d2d2d;
-  --input-bg: #333333;
+html[data-theme="dark"] {
+    --bg-primary: #232a36;
+    --bg-secondary: #181c24;
+    --input-bg: #232a36;
+    --border-color: #333a4d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaa;
+    --shadow-color: #000a;
 }
 
-/* Add smooth transitions between themes */
+html[data-theme="light"] {
+    --bg-primary: #fff;
+    --bg-secondary: #f5f5f5;
+    --input-bg: #f9f9f9;
+    --border-color: #b0b0b0;
+    --text-primary: #222;
+    --text-secondary: #444;
+    --shadow-color: #b0b0b0;
+}
+
+/* Sistema: adapta al modo del SO */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]):not([data-theme="dark"]) {
+    --bg-primary: #232a36;
+    --bg-secondary: #181c24;
+    --input-bg: #232a36;
+    --border-color: #333a4d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaa;
+    --shadow-color: #000a;
+  }
+}
+@media (prefers-color-scheme: light) {
+  html:not([data-theme="light"]):not([data-theme="dark"]) {
+    --bg-primary: #fff;
+    --bg-secondary: #f5f5f5;
+    --input-bg: #f9f9f9;
+    --border-color: #b0b0b0;
+    --text-primary: #222;
+    --text-secondary: #444;
+    --shadow-color: #b0b0b0;
+  }
+}
+
+/* Transiciones suaves */
 body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.3s, color 0.3s;
 }
 
-/* Theme switcher styles */
-.theme-switcher {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 15px;
+/* Theme switcher */
+.theme-switcher-global {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 1000;
 }
-
-.theme-switcher-label {
-  margin-right: 10px;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-}
-
-.theme-switcher select {
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 1px solid var(--border-color);
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-
-.theme-switcher select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-/* Estilos para el selector de tema */
-.theme-switcher {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-}
-
 #theme-toggle {
-  background-color: var(--bg-secondary);
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 10px var(--shadow-color);
-  transition: transform 0.2s, background-color 0.3s;
-  position: relative;
-  overflow: hidden;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background 0.2s;
 }
-
 #theme-toggle:hover {
-  transform: scale(1.1);
+    background: var(--bg-secondary);
 }
-
 #theme-toggle svg {
-  width: 24px;
-  height: 24px;
-  fill: var(--text-primary);
-  position: absolute;
-  opacity: 0;
-  transition: opacity 0.3s;
+    width: 28px;
+    height: 28px;
+    display: none;
 }
-
-/* Mostrar icono según el tema actual */
 html[data-theme="light"] #theme-toggle .sun-icon,
 html:not([data-theme]) #theme-toggle .sun-icon {
-  opacity: 1;
+    display: inline;
 }
-
 html[data-theme="dark"] #theme-toggle .moon-icon {
-  opacity: 1;
+    display: inline;
 }
-
-html[data-theme="system"] #theme-toggle .system-icon {
-  opacity: 1;
-}
-
 .theme-dropdown {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: var(--bg-primary);
-  border-radius: 8px;
-  box-shadow: 0 5px 15px var(--shadow-color);
-  width: 140px;
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 38px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    min-width: 120px;
+    z-index: 1001;
 }
-
-.theme-switcher:hover .theme-dropdown {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.theme-switcher-global:hover .theme-dropdown {
+    display: block;
 }
-
 .theme-option {
-  display: flex;
-  align-items: center;
-  padding: 10px 15px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-primary);
+    background: none;
+    border: none;
+    font-size: 15px;
 }
-
 .theme-option:hover {
-  background-color: var(--bg-secondary);
+    background: var(--bg-secondary);
 }
-
 .theme-icon {
-  margin-right: 10px;
-  font-size: 16px;
-}
-
-/* Indicador de tema seleccionado */
-html[data-theme="light"] .theme-option[data-theme="light"],
-html:not([data-theme]) .theme-option[data-theme="light"],
-html[data-theme="dark"] .theme-option[data-theme="dark"],
-html[data-theme="system"] .theme-option[data-theme="system"] {
-  background-color: var(--primary-color);
-  color: white;
+    font-size: 18px;
 }

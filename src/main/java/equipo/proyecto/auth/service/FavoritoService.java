@@ -23,6 +23,15 @@ public class FavoritoService {
         return favoritoRepository.findByUsuarioIdAndTipo(usuarioId, tipo);
     }
 
+    public boolean eliminarFavoritoPorId(Long id) {
+    if (favoritoRepository.existsById(id)) {
+        favoritoRepository.deleteById(id);
+        return true;
+    }
+    return false;
+}
+
+
     @Transactional
     public Favorito guardarFavorito(Favorito favorito) {
         Optional<Favorito> favoritoExistente = favoritoRepository
